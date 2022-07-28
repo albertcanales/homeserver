@@ -1,0 +1,14 @@
+[server]
+192.168.1.134
+
+
+[homepi]
+192.168.1.27
+
+[homepi:vars]
+docker_compose_arch=armv7
+docker_apt_arch=arm64
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=albert
