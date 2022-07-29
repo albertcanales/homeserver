@@ -3,5 +3,41 @@
   hosts: all
   become: true
   
+  vars:
+      pip_install_packages:
+        - name: docker
+
   roles:
+    - geerlingguy.pip
     - geerlingguy.docker
+
+
+- name: Configure Home Pi
+  hosts: homepi
+  become: true
+
+  vars_files:
+    - secret.yml
+
+  tasks:
+
+    - name: WG Easy Container
+      docker_container:
+        name: wg-easy
+        image: weejewel/wg-easy
+        state: started
+        restart_policy: unless-stopped
+        capabilities:
+          - NET_ADMIN
+          - SYS_MODULE
+        volumes:
+          - "wg-easy:/etc/wireguard"
+        ports:
+          - "51820:51820/udp"
+          - "51821:51821/tcp"
+        env:
+          WG_HOST: "{{ ddns_endpoint }}"
+          PASSWORD: "{{ wg_easy_password }}"
+        sysctls:
+          net.ipv4.conf.all.src_valid_mark: 1
+          net.ipv4.ip_forward: 1
