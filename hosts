@@ -1,5 +1,5 @@
 [server]
-192.168.1.134
+192.168.1.29
 
 [homepi]
 192.168.1.27
@@ -11,3 +11,4 @@ docker_apt_arch=arm64
 [all:vars]
 ansible_connection=ssh
 ansible_user=albert
+timezone="Europe/Madrid"
