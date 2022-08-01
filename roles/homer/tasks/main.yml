@@ -1,0 +1,19 @@
+- name: Configure Homer container
+  docker_container:
+    name: homer
+    image: b4bz/homer
+    restart_policy: always
+    ports:
+      - '8080:8080'
+    volumes:
+      - 'homer-assets:/www/assets'
+
+- name: Get homer volume info
+  docker_volume_info:
+    name: homer-assets
+  register: homer_volume
+
+- name: Copy config template to assets
+  template:
+    src: config.yml.j2
+    dest: "{{ homer_volume.volume.Mountpoint }}/config.yml"

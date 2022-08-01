@@ -59,6 +59,10 @@
               networks:
                 - seafile-net
 
+    - name: Configure Homer
+      include_role:
+        name: homer
+
     - name: Configure Calibre container
       docker_container:
         name: calibre-web
