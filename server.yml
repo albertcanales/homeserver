@@ -58,3 +58,21 @@
                 - memcached
               networks:
                 - seafile-net
+
+    - name: Configure Calibre container
+      docker_container:
+        name: calibre-web
+        image: lscr.io/linuxserver/calibre-web
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - '8083:8083'
+        env:
+          PUID: '1000'
+          PGID: '1000'
+          TZ: "{{ timezone }}"
+          DOCKER_MODS: 'linuxserver/mods:universal-calibre'
+          OAUTHLIB_RELAX_TOKEN_SCOPE: '1'
+        volumes:
+          - 'calibre-config:/config'
+          - 'calibre-data:/books'
