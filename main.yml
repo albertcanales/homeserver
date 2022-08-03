@@ -2,6 +2,9 @@
 - name: Basic configuration for all hosts
   hosts: all
   become: true
+
+  vars_files:
+    - secret.yml
   
   vars:
       pip_install_packages:
@@ -11,6 +14,7 @@
   roles:
     - geerlingguy.pip
     - geerlingguy.docker
+    - ssh
 
 - import_playbook: homepi.yml
 - import_playbook: server.yml

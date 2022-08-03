@@ -1,0 +1,30 @@
+---
+# Role based on the one from notthebee:
+# https://github.com/notthebee/ansible-easy-vpn/blob/main/roles/ssh/tasks/main.yml
+
+- name: Install the existing public key
+  authorized_key:
+    user: "{{ ansible_user }}"
+    key: "{{ lookup('file', ssh_public_key) }}"
+
+- name: Update SSH configuration to be more secure
+  register: ssh_config
+  lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    validate: "sshd -T -f %s"
+    mode: 0644
+  with_items:
+    - regexp: "^#?PasswordAuthentication"
+      line: "PasswordAuthentication no"
+    - regexp: "^#?PermitRootLogin"
+      line: "PermitRootLogin no"
+    - regexp: "^#?Port"
+      line: "Port {{ ansible_port }}"
+    - regexp: "^#?PermitEmptyPasswords"
+      line: "PermitEmptyPasswords no"
+    - regexp: "^#?X11Forwarding"
+      line: "X11Forwarding no"
+  notify: restart-sshd
