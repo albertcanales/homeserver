@@ -1,0 +1,52 @@
+---
+- name: Configure SeaFile service
+  docker_compose:
+    project_name: seafile
+    definition:
+      version: '2'
+      networks:
+        seafile-net:
+      volumes:
+        seafile-db:
+        seafile-data:
+      services:
+        db:
+          container_name: seafile-mysql
+          image: mariadb:10.5
+          restart: unless-stopped
+          environment:
+            - "MYSQL_ROOT_PASSWORD={{ seafile_db_password }}"
+            - "MYSQL_LOG_CONSOLE=true"
+          networks:
+            - seafile-net
+          volumes:
+            - 'seafile-db:/var/lib/mysql'
+
+        memcached:
+          container_name: seafile-memcached
+          image: memcached:1.6
+          restart: unless-stopped
+          entrypoint: memcached -m 256
+          networks:
+            - seafile-net
+
+        seafile:
+          container_name: seafile
+          image: seafileltd/seafile-mc:latest
+          restart: unless-stopped
+          ports:
+            - '500:80'
+          volumes:
+            - 'seafile-data:/shared'
+          environment:
+            - "DB_HOST=db"
+            - "DB_ROOT_PASSWD={{ seafile_db_password }}"
+            - "TIME_ZONE={{ timezone }}"
+            - "SEAFILE_ADMIN_EMAIL={{ seafile_admin_mail }}"
+            - "SEAFILE_ADMIN_PASSWORD={{ seafile_admin_password }}"
+            - "SEAFILE_SERVER_LETSENCRYPT=false"
+          depends_on:
+            - db
+            - memcached
+          networks:
+            - seafile-net

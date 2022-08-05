@@ -1,3 +1,4 @@
+---
 - name: Configure Homer container
   docker_container:
     name: homer

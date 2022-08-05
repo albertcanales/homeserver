@@ -1,0 +1,16 @@
+---
+- name: Configure PiHole Container
+  docker_container:
+    name: pihole
+    image: pihole/pihole
+    state: stopped
+    network_mode: host
+    restart_policy: unless-stopped
+    capabilities:
+      - NET_ADMIN
+    env:
+      TZ: "{{ timezone }}"
+      WEBPASSWORD: "{{ pihole_password }}"
+    volumes:
+      - 'ph_pihole:/etc/pihole'
+      - 'ph_dnsmasq:/etc/dnsmasq.d'
