@@ -1,11 +1,12 @@
 ---
 
 title: "The Home Server"
-subtitle: "Just that, it's a home server"
+subtitle: "Just that, it's my home server"
 documentTitle: "Homeserver"
-logo: "assets/logo.png"
+logo: "assets/icons/homer.png"
 
 header: true
+footer: ''
 
 columns: "3"
 
@@ -25,40 +26,29 @@ links:
     icon: "fas fa-book"
     url: "https://github.com/albertcanales/homeserver"
 
-# Services
-# First level array represents a group.
-# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "Application"
-    icon: "fas fa-code-branch"
-    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
-    # logo: "path/to/logo"
+  - name: "Applications"
+    icon: "fas fa-cloud"
     items:
-      - name: "Awesome app"
-        logo: "assets/tools/sample.png"
-        # Alternatively a fa icon can be provided:
-        # icon: "fab fa-jenkins"
-        subtitle: "Bookmark example"
-        tag: "app"
-        keywords: "self hosted reddit" # optional keyword used for searching purpose
-        url: "https://www.reddit.com/r/selfhosted/"
-        target: "_blank" # optional html tag target attribute
-      - name: "Another one"
-        logo: "assets/tools/sample2.png"
-        subtitle: "Another application"
-        tag: "app"
-        # Optional tagstyle
-        tagstyle: "is-success"
-        url: "#"
-  - name: "Other group"
-    icon: "fas fa-heartbeat"
+      - name: "Nextcloud"
+        logo: "assets/icons/nextcloud.png"
+        subtitle: "File hosting service"
+        url: "http://{{ ansible_host }}:500"
+      - name: "Jellyfin"
+        logo: "assets/icons/jellyfin.png"
+        subtitle: "Movie and show library"
+        url: "http://{{ ansible_host }}:8096"
+      - name: "Calibre"
+        logo: "assets/icons/calibre.png"
+        subtitle: "Book library"
+        url: "http://{{ ansible_host }}:8083"
+  - name: "Administration"
+    icon: "fas fa-tools"
     items:
-      - name: "Pi-hole"
-        logo: "assets/tools/sample.png"
-        # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
-        url: "http://192.168.0.151/admin"
-        type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
+      - name: "Wireguard"
+        logo: "assets/icons/wireguard.png"
+        subtitle: "VPN service"
+        url: "http://192.168.1.27:51821"
+      - name: "Router configuration"
+        logo: "assets/icons/router.png"
+        url: "http://192.168.1.1"
