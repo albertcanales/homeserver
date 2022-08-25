@@ -1,0 +1,14 @@
+---
+- name: Configure Home Assistant container
+  docker_container:
+    name: homeassistant
+    image: homeassistant/home-assistant
+    state: started
+    restart_policy: unless-stopped
+    network_mode: host
+    privileged: true
+    env:
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'homeassistant-config:/config'
+      - '{{ data_path }}/media/books:/books'

@@ -21,7 +21,6 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
 
-
 - name: Copy config template to assets
   template:
     src: config.yml.j2

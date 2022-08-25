@@ -42,6 +42,10 @@ services:
         logo: "assets/icons/calibre.png"
         subtitle: "Book library"
         url: "http://{{ ansible_host }}:8083"
+      - name: "Home Assistant"
+        logo: "assets/icons/homeassistant.png"
+        subtitle: "Home Automation"
+        url: "http://{{ ansible_host }}:8123"
   - name: "Administration"
     icon: "fas fa-tools"
     items:

@@ -30,3 +30,7 @@
     - name: Configure Nextcloud
       include_role:
         name: nextcloud
+
+    - name: Configure Home Assistant
+      include_role:
+        name: homeassistant
