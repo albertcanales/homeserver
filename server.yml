@@ -7,6 +7,14 @@
 
   tasks:
 
+    - name: Ensure Data Drive is mounted
+      mount:
+        src: /dev/sdb1
+        path: /data
+        fstype: ntfs
+        state: mounted
+        opts: permissions
+
     - name: Configure Homer
       include_role:
         name: homer
@@ -19,6 +27,6 @@
       include_role:
         name: jellyfin
 
-    - name: Configure Seafile
+    - name: Configure Nextcloud
       include_role:
-        name: seafile
+        name: nextcloud

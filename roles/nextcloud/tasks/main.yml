@@ -1,0 +1,44 @@
+---
+- name: Configure Nextcloud service
+  docker_compose:
+    project_name: nextcloud
+    definition:
+      version: '2'
+      volumes:
+        nextcloud-db:
+        nextcloud-nextcloud:
+        nextcloud-data:
+          driver: local
+          driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/data/files'
+      services:
+        db:
+          container_name: nextcloud-db
+          image: mariadb:10.5
+          restart: always
+          command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+          volumes:
+            - nextcloud-db:/var/lib/mysql
+          environment:
+            - "MYSQL_ROOT_PASSWORD={{ nextcloud_root_db_password }}"
+            - "MYSQL_PASSWORD={{ nextcloud_db_password }}"
+            - MYSQL_DATABASE=nextcloud
+            - MYSQL_USER=nextcloud
+        app:
+          container_name: nextcloud-app
+          image: nextcloud
+          restart: always
+          ports:
+            - 500:80
+          links:
+            - db
+          volumes:
+            - nextcloud-nextcloud:/var/www/html
+            - nextcloud-data:/var/www/html/data
+          environment:
+            - "MYSQL_PASSWORD={{ nextcloud_db_password }}"
+            - MYSQL_DATABASE=nextcloud
+            - MYSQL_USER=nextcloud
+            - MYSQL_HOST=db
