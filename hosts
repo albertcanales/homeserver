@@ -18,3 +18,4 @@ ansible_user=albert
 ansible_port=22
 timezone="Europe/Madrid"
 ssh_public_key="/home/albert/.ssh/id_ed25519.pub"
+data_path="/data"

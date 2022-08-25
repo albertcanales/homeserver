@@ -10,7 +10,7 @@
     - name: Ensure Data Drive is mounted
       mount:
         src: /dev/sdb1
-        path: /data
+        path: "{{ data_path }}"
         fstype: ntfs
         state: mounted
         opts: permissions

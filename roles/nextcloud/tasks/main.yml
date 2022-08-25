@@ -12,7 +12,7 @@
           driver_opts:
             type: 'none'
             o: 'bind'
-            device: '/data/files'
+            device: "{{ data_path }}/files"
       services:
         db:
           container_name: nextcloud-db
