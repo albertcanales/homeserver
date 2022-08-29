@@ -15,6 +15,10 @@
         state: mounted
         opts: permissions
 
+    - name: Configure MkDocs
+      include_role:
+        name: mkdocs
+
     - name: Configure Homer
       include_role:
         name: homer
