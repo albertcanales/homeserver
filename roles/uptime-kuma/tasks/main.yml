@@ -1,0 +1,11 @@
+---
+- name: Configure Uptime Kuma Container
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma
+    state: started
+    restart_policy: always
+    ports:
+      - '3001:3001'
+    volumes:
+      - 'uptime-kuma:/app/data'
