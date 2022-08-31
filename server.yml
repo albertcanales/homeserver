@@ -19,6 +19,10 @@
       include_role:
         name: mkdocs
 
+    - name: Configure DockProm
+      include_role:
+        name: dockprom
+
     - name: Configure Homer
       include_role:
         name: homer
