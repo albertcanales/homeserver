@@ -18,12 +18,14 @@
     dest: "{{ data_path }}/docs"
     key_file: "{{ ssh_keypair.filename }}"
     accept_hostkey: true
+  register: docs_repo
 
 - name: Configure MkDocs container
   docker_container:
     name: mkdocs
     image: polinux/mkdocs
     restart_policy: always
+    restart: "{{ docs_repo.changed }}"
     env:
       ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material'
       FAST_MODE: 'true'

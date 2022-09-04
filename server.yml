@@ -42,3 +42,7 @@
     - name: Configure Home Assistant
       include_role:
         name: homeassistant
+
+    - name: Configure FreshRSS
+      include_role:
+        name: freshrss
