@@ -1,0 +1,16 @@
+---
+- name: Configure Sonarr container
+  docker_container:
+    name: sonarr
+    image: lscr.io/linuxserver/sonarr
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'sonarr-config:/config'
+      - '{{ data_path }}/media/shows:/tv'
+      - '{{ data_path }}/media/downloads:/downloads'
+    ports:
+      - '8989:8989'

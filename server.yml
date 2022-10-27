@@ -50,3 +50,11 @@
     - name: Configure Deluge
       include_role:
         name: deluge
+
+    - name: Configure Radarr
+      include_role:
+        name: radarr
+
+    - name: Configure Sonarr
+      include_role:
+        name: sonarr

@@ -1,0 +1,16 @@
+---
+- name: Configure Radarr container
+  docker_container:
+    name: radarr
+    image: lscr.io/linuxserver/radarr
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'radarr-config:/config'
+      - '{{ data_path }}/media/movies:/movies'
+      - '{{ data_path }}/media/downloads:/downloads'
+    ports:
+      - '7878:7878'
