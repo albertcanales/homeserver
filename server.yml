@@ -46,3 +46,7 @@
     - name: Configure FreshRSS
       include_role:
         name: freshrss
+
+    - name: Configure Deluge
+      include_role:
+        name: deluge

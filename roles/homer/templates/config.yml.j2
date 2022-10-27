@@ -50,6 +50,13 @@ services:
         logo: "assets/icons/freshrss.png"
         subtitle: "A RSS Aggregator"
         url: "http://{{ ansible_host }}:4000"
+  - name: "Media Management"
+    icon: "fas fa-photo-film"
+    items:
+      - name: "Deluge"
+        logo: "assets/icons/deluge.svg"
+        subtitle: "BitTorrent client"
+        url: "http://{{ ansible_host }}:8112"
   - name: "Administration"
     icon: "fas fa-tools"
     items:
