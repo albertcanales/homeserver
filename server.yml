@@ -58,3 +58,7 @@
     - name: Configure Sonarr
       include_role:
         name: sonarr
+
+    - name: Configure Overleaf
+      include_role:
+        name: overleaf

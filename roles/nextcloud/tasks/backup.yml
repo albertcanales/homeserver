@@ -1,0 +1,31 @@
+---
+# Based on the official documentation:
+# https://docs.nextcloud.com/server/latest/admin_manual/maintenance/backup.html
+
+- name: Enable Maintenance mode
+  community.docker.docker_container_exec:
+    container: nextcloud-app
+    command: php occ maintenance:mode --on
+    # chdir: /var/www/html/nextcloud/
+    user: www-data
+  register: result
+
+- name: Backup configuration
+  debug:
+    msg: Backup the nextcloud_nextcloud-nextcloud volume
+
+- name: Backup data
+  debug:
+    msg: Backup the nextcloud_nextcloud-data volume
+
+- name: Backup database
+  debug:
+    msg: Use the mysqldump command on the above website
+
+- name: Disable Maintenance mode
+  community.docker.docker_container_exec:
+    container: nextcloud-app
+    command: php occ maintenance:mode --off
+    # chdir: /var/www/html/nextcloud/
+    user: www-data
+  register: result
