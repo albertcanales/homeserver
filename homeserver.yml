@@ -1,5 +1,5 @@
 - name: Configure Home Server
-  hosts: server
+  hosts: homeserver
   become: true
 
   vars_files:
@@ -14,6 +14,12 @@
         fstype: ntfs
         state: mounted
         opts: permissions
+
+    - name: Configure Tailscale
+      include_role:
+        name: tailscale
+      vars:
+        tailscale_key: "{{ tailscale_homeserver_key }}"
 
     - name: Configure MkDocs
       include_role:

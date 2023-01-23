@@ -17,4 +17,5 @@
     - ssh
 
 - import_playbook: homepi.yml
-- import_playbook: server.yml
+- import_playbook: homeserver.yml
+- import_playbook: torreserver.yml

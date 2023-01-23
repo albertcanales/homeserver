@@ -1,0 +1,20 @@
+---
+- name: Configure Tailscale container
+  docker_container:
+    name: tailscale
+    image: tailscale/tailscale
+    restart_policy: unless-stopped
+    network_mode: host
+    privileged: true
+    capabilities:
+      - NET_ADMIN
+      - NET_RAW
+    env:
+      TS_AUTH_KEY: "{{ tailscale_key }}"
+      TS_ROUTES: "{{ home_network }}"
+      TS_SOCKET: '/var/run/tailscale/tailscaled.sock'
+    volumes:
+      - '/var/lib:/var/lib'
+      - '/dev/net/tun:/dev/net/tun'
+  notify:
+    - tailscale-accept-routes

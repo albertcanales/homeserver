@@ -1,8 +1,8 @@
-[server]
+[homeserver]
 192.168.1.29
 
-[server:vars]
-ansible_become_pass="{{ server_become_pass }}"
+[homeserver:vars]
+ansible_become_pass="{{ homeserver_become_pass }}"
 
 [homepi]
 192.168.1.27
@@ -11,6 +11,12 @@ ansible_become_pass="{{ server_become_pass }}"
 ansible_become_pass="{{ homepi_become_pass }}"
 docker_compose_arch=armv7
 docker_apt_arch=arm64
+
+[torreserver]
+192.168.100.101
+
+[torreserver:vars]
+ansible_become_pass="{{ torreserver_become_pass }}"
 
 [all:vars]
 ansible_connection=ssh
