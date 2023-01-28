@@ -1,0 +1,17 @@
+---
+- name: Pull the latest image
+  docker_image:
+    name: "{{ image_name }}:{{ tag }}"
+    source: pull
+
+- name: Stop the container
+  docker_container:
+    name: "{{ container_name }}"
+    image: "{{ image_name }}"
+    state: stopped
+
+- name: Remove the container
+  docker_container:
+    name: "{{ container_name }}"
+    state: absent
+

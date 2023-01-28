@@ -1,0 +1,28 @@
+---
+- hosts: homeserver
+  gather_facts: true
+  become: true
+
+  vars_files:
+    - secret.yml
+
+  tasks:
+    - name: Upgrade Jellyfin
+      include_role:
+        name: jellyfin
+        tasks_from: update
+
+
+
+- hosts: homepi
+  gather_facts: true
+  become: true
+
+  vars_files:
+    - secret.yml
+
+  tasks:
+    - name: Upgrade Uptime Kuma
+      include_role:
+        name: uptime-kuma
+        tasks_from: update
