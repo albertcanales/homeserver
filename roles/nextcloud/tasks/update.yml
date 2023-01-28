@@ -1,0 +1,11 @@
+---
+- name: Remove existing containers
+  include_role:
+    name: container
+    tasks_from: update
+  vars:
+    container_name: nextcloud-app
+    image_name: nextcloud
+
+- name: Set up the updated container
+  include_tasks: main.yml

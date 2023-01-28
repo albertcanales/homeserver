@@ -3,15 +3,19 @@
   docker_image:
     name: "{{ image_name }}:{{ tag }}"
     source: pull
+    force_source: true
+  register: image_pull
 
 - name: Stop the container
   docker_container:
     name: "{{ container_name }}"
     image: "{{ image_name }}"
     state: stopped
+  when: image_pull.changed
 
 - name: Remove the container
   docker_container:
     name: "{{ container_name }}"
     state: absent
+  when: image_pull.changed
 
