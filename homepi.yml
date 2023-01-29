@@ -7,10 +7,6 @@
 
   tasks:
 
-    - name: Configure WG-Easy
-      include_role:
-        name: wg-easy
-
     - name: Configure PiHole
       include_role:
         name: pihole

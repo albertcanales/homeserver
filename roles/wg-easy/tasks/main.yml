@@ -10,6 +10,7 @@
       - SYS_MODULE
     env:
       WG_HOST: "{{ ddns_endpoint }}"
+      WG_ALLOWED_IPS: "{{ home_network }}"
       PASSWORD: "{{ wg_easy_password }}"
     ports:
       - "51820:51820/udp"

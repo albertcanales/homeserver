@@ -5,6 +5,9 @@
   vars_files:
     - secret.yml
 
+  vars:
+    data_path: /data
+
   tasks:
 
     - name: Ensure Data Drive is mounted
@@ -14,6 +17,10 @@
         fstype: ntfs
         state: mounted
         opts: permissions
+
+    - name: Configure WG-Easy
+      include_role:
+        name: wg-easy
 
     - name: Configure Tailscale
       include_role:

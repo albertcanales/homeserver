@@ -1,8 +1,8 @@
 ---
 - name: Remove existing containers
   include_role:
-    name: container
-    tasks_from: update
+    name: my_docker
+    tasks_from: update_container
   vars:
     container_name: homeassistant
     image_name: homeassistant/home-assistant

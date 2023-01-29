@@ -1,8 +1,8 @@
 ---
 - name: Remove existing container
   include_role:
-    name: container
-    tasks_from: update
+    name: my_docker
+    tasks_from: update_container
   vars:
     container_name: uptime-kuma
     image_name: louislam/uptime-kuma
