@@ -1,0 +1,17 @@
+---
+- name: Stop the container
+  docker_container:
+    name: "{{ container_name }}"
+    image: "{{ image_name }}"
+    state: stopped
+
+- name: Backup each volume
+  include_tasks: backup_volumes_each.yml
+  loop: "{{ volume_names }}"
+  loop_control:
+    loop_var: volume_name
+
+- name: Start the container
+  docker_container:
+    name: "{{ container_name }}"
+    state: started

@@ -1,0 +1,10 @@
+---
+- name: Backup config volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - wg-easy
+    container_name: wg-easy
+    image_name: weejewel/wg-easy

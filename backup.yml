@@ -1,13 +1,42 @@
 ---
-- hosts: server
+- hosts: homeserver
   gather_facts: yes
   become: yes
 
   vars_files:
     - secret.yml
 
+  vars:
+    backup_path: /data/backup
+    backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
+
   tasks:
-    - name: Backup Nextcloud
+    #- name: Ensure Backup Drive is mounted
+    #  mount:
+    #    src: "UUID={{ backup_drive_uuid }}"
+    #    path: "{{ backup_path }}"
+    #    state: mounted
+
+    - name: Get Backup Timestamp
+      shell: date +%Y-%m-%d-%H-%M
+      register: backtup_timestamp
+      changed_when: false
+
+    - name: Create Backup Directory
+      file:
+        path: "{{ backup_path }}/{{ backtup_timestamp.stdout }}"
+        state: directory
+
+    - name: Set backup_volumes_dest fact
+      set_fact:
+        backup_volumes_dest: "{{ backup_path }}/{{ backtup_timestamp.stdout }}/volumes"
+
+    - name: Backup Wireguard Easy
       include_role:
-        name: nextcloud
+        name: wg-easy
         tasks_from: backup
+
+    - name: Ensure Backup Drive is unmounted
+      mount:
+        path: "{{ backup_path }}"
+        state: unmounted

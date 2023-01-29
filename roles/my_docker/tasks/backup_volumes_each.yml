@@ -1,0 +1,16 @@
+---
+- name: Get Volume Information
+  docker_volume_info:
+    name: "{{ volume_name }}"
+  register: volume_info
+
+- name: Create directory for backup
+  file:
+    path: "{{ backup_volumes_dest }}/{{ volume_name }}"
+    state: directory
+
+- name: Backup volume
+  synchronize:
+    src: "{{ volume_info.volume.Mountpoint }}"
+    dest: "{{ backup_volumes_dest }}/{{ volume_name }}"
+  delegate_to: "{{ inventory_hostname }}"
