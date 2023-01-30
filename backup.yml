@@ -7,8 +7,10 @@
     - secret.yml
 
   vars:
+    data_path: /data
     backup_path: /data/backup
     backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
+    timestamped_backup: false
 
   tasks:
     #- name: Ensure Backup Drive is mounted
@@ -21,20 +23,57 @@
       shell: date +%Y-%m-%d-%H-%M
       register: backtup_timestamp
       changed_when: false
+      when: timestamped_backup
+
+    - name: Set Timestamped Backup Destination facts
+      set_fact: 
+        backup_dest: "{{ backup_path }}/{{ backtup_timestamp.stdout }}"
+        backup_volumes_dest: "{{ backup_path }}/{{ backtup_timestamp.stdout }}/volumes"
+      when: timestamped_backup
+    
+    - name: Set Non Timestamped Backup Destination facts
+      set_fact: 
+        backup_dest: "{{ backup_path }}"
+        backup_volumes_dest: "{{ backup_path }}/volumes"
+      when: not timestamped_backup
 
     - name: Create Backup Directory
       file:
-        path: "{{ backup_path }}/{{ backtup_timestamp.stdout }}"
+        path: "{{ backup_dest }}"
         state: directory
 
-    - name: Set backup_volumes_dest fact
-      set_fact:
-        backup_volumes_dest: "{{ backup_path }}/{{ backtup_timestamp.stdout }}/volumes"
+    # Backup container volumes
 
-    - name: Backup Wireguard Easy
+    - name: Backup Docker Services
       include_role:
-        name: wg-easy
+        name: "{{ item }}"
         tasks_from: backup
+      loop:
+        - calibre
+        - deluge
+        - dockprom
+        - freshrss
+        - homeassistant
+        - jellyfin
+        - overleaf
+        - radarr
+        - sonarr
+        - wg-easy
+
+    # Backup media directory
+
+    - name: Create media directory
+      file:
+        path: "{{ backup_path }}/media/audiobooks"
+        state: directory
+
+    - name: Backup media directory
+      synchronize:
+        src: "{{ data_path }}/media/audiobooks"
+        dest: "{{ backup_path }}/media"
+      delegate_to: "{{ inventory_hostname }}"
+
+    #
 
     - name: Ensure Backup Drive is unmounted
       mount:

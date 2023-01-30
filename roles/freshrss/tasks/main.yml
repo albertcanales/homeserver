@@ -10,7 +10,5 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'freshrss-config:/config'
-      - '{{ data_path }}/media/shows:/data/shows'
-      - '{{ data_path }}/media/movies:/data/movies'
     ports:
       - '4000:80'
