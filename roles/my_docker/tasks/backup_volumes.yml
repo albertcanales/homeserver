@@ -4,6 +4,7 @@
     name: "{{ container_name }}"
     image: "{{ image_name }}"
     state: stopped
+  when: container_name is defined and image_name is defined and container_start_stop
 
 - name: Backup each volume
   include_tasks: backup_volumes_each.yml
@@ -15,3 +16,4 @@
   docker_container:
     name: "{{ container_name }}"
     state: started
+  when: container_name is defined and container_start_stop

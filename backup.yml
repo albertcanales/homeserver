@@ -8,16 +8,21 @@
 
   vars:
     data_path: /data
-    backup_path: /data/backup
+    backup_path: /backup
     backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
     timestamped_backup: false
+    backup_files: true
+    backup_containers: false
+    backup_media: false
+    container_start_stop: true
 
   tasks:
-    #- name: Ensure Backup Drive is mounted
-    #  mount:
-    #    src: "UUID={{ backup_drive_uuid }}"
-    #    path: "{{ backup_path }}"
-    #    state: mounted
+    - name: Ensure Backup Drive is mounted
+      mount:
+        src: "UUID={{ backup_drive_uuid }}"
+        path: "{{ backup_path }}"
+        fstype: ext4
+        state: mounted
 
     - name: Get Backup Timestamp
       shell: date +%Y-%m-%d-%H-%M
@@ -42,6 +47,22 @@
         path: "{{ backup_dest }}"
         state: directory
 
+    # Backup files directory
+
+    - name: Create files directory
+      file:
+        path: "{{ backup_path }}/files"
+        state: directory
+      when: backup_files
+    
+    - name: Backup files directory
+      synchronize:
+        src: "{{ data_path }}/files"
+        dest: "{{ backup_path }}"
+      delegate_to: "{{ inventory_hostname }}"
+      when: backup_files
+    #
+
     # Backup container volumes
 
     - name: Backup Docker Services
@@ -55,24 +76,27 @@
         - freshrss
         - homeassistant
         - jellyfin
+        - nextcloud
         - overleaf
         - radarr
         - sonarr
         - wg-easy
+      when: backup_containers
 
     # Backup media directory
 
     - name: Create media directory
       file:
-        path: "{{ backup_path }}/media/audiobooks"
+        path: "{{ backup_path }}/media"
         state: directory
-
+      when: backup_media
+    
     - name: Backup media directory
       synchronize:
-        src: "{{ data_path }}/media/audiobooks"
-        dest: "{{ backup_path }}/media"
+        src: "{{ data_path }}/media"
+        dest: "{{ backup_path }}"
       delegate_to: "{{ inventory_hostname }}"
-
+      when: backup_media
     #
 
     - name: Ensure Backup Drive is unmounted

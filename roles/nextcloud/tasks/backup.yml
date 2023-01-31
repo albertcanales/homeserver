@@ -10,17 +10,26 @@
     user: www-data
   register: result
 
-- name: Backup configuration
-  debug:
-    msg: Backup the nextcloud_nextcloud-nextcloud volume
+# Should be done with mysqldump, but this is enough for now
+- name: Backup database volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - nextcloud_nextcloud-db
+    container_name: nextcloud-db
+    image_name: mariadb:10.5
 
-- name: Backup data
-  debug:
-    msg: Backup the nextcloud_nextcloud-data volume
-
-- name: Backup database
-  debug:
-    msg: Use the mysqldump command on the above website
+- name: Backup data volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - nextcloud_nextcloud-nextcloud
+    container_name: nextcloud_nextcloud-app
+    image_name: nextcloud
 
 - name: Disable Maintenance mode
   community.docker.docker_container_exec:
