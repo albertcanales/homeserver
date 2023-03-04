@@ -6,14 +6,14 @@ As it is for personal use, features can be added, modified or deleted on master 
 
 The services present in this repository are hosted in two machines:
 
-- **HomePi**: Raspberry Pi 3B
+- **TorreServer**: Toshiba Satellite Pro
 - **HomeServer**: Lenovo Thinkcentre M900 Tiny
 
 For development reasons, there are three different playbooks:
 
 - `main.yml`: Tasks for both machines, also calls to the two playbooks below
-- `server.yml`: Tasks for the HomeServer machine
-- `homepi.yml`: Tasks for the HomePi machine
+- `homeserver.yml`: Tasks for the HomeServer machine
+- `torreserver.yml`: Tasks for the TorreServer machine
 
 Inside the latter two, one can easily see which services are hosted into each machine.
 
@@ -48,13 +48,23 @@ wg_easy_password:
 pihole_password:
 
 ### home server
-server_become_pass:
+homeserver_become_pass:
 data_uuid:
 
 # nextcloud
 nextcloud_root_db_password:
 nextcloud_db_password:
 
+# overleaf
+mail_user:
+mail_pass:
+
+# tailscale
+tailscale_auth_key:
+home_network:
+
+### torreserver
+torreserver_become_pass:
 ```
 
 Finally, update the hosts file to your particular use case. Keep in mind that manual configuration for static IP, port-forwading and DDNS may be required on your router.
