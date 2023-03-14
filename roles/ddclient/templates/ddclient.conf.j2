@@ -1,0 +1,13 @@
+daemon=300				# check every 300 seconds
+syslog=yes				# log update msgs to syslog
+pid=/var/run/ddclient/ddclient.pid	# record PID in file.
+ssl=yes 				# use ssl-support.  Works with
+						# ssl-library
+verbose=yes
+
+protocol=freedns
+use=web, web=myip.dnsomatic.com
+server=freedns.afraid.org
+login={{ freedns_user }}
+password={{ freedns_password }}
+{{ ddns_endpoint }}

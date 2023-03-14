@@ -1,0 +1,23 @@
+---
+- name: Configure DDClient
+  docker_container:
+    name: ddclient
+    image: lscr.io/linuxserver/ddclient
+    state: started
+    restart_policy: unless-stopped
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "{{ timezone }}"
+    volumes:
+      - "ddclient:/config"
+
+- name: Get ddlclient volume info
+  docker_volume_info:
+    name: ddclient
+  register: ddclient_volume
+
+- name: Copy config file to container
+  template:
+    src: ddclient.conf.j2
+    dest: "{{ ddclient_volume.volume.Mountpoint }}/ddclient.conf"

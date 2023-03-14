@@ -22,11 +22,12 @@
       include_role:
         name: wg-easy
 
-    - name: Configure Tailscale
+    - name: Configure DDClient
       include_role:
-        name: tailscale
-      vars:
-        tailscale_key: "{{ tailscale_homeserver_key }}"
+        name: ddclient
+        apply:
+          tags: testing
+      tags: testing
 
     - name: Configure MkDocs
       include_role:
