@@ -22,6 +22,7 @@
         src: "UUID={{ backup_drive_uuid }}"
         path: "{{ backup_path }}"
         fstype: ext4
+        boot: false
         state: mounted
 
     - name: Get Backup Timestamp

@@ -1,23 +1,9 @@
 ---
-- name: Run ssh role if not done already
-  include_role:
-    name: ssh
-  when: ssh_role_ran is not defined
-
-- name: Add the deploy key to the Github repository
-  github_deploy_key:
-    key: "{{ ssh_keypair.public_key }}"
-    name: homeserver
-    owner: "{{ repo_owner }}"
-    repo: "{{ repo_name }}"
-    token: "{{ github_deploy_token }}"
 
 - name: Pull the documentation repository
   git:
-    repo: "git@github.com:{{ repo_owner }}/{{ repo_name }}.git"
+    repo: "https://oauth2:{{ github_fine_token }}@github.com/{{ repo_owner }}/{{ repo_name }}.git"
     dest: "{{ data_path }}/docs"
-    key_file: "{{ ssh_keypair.filename }}"
-    accept_hostkey: true
   register: docs_repo
 
 - name: Configure MkDocs container

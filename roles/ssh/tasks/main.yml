@@ -2,17 +2,6 @@
 # Role based on the one from notthebee:
 # https://github.com/notthebee/ansible-easy-vpn/blob/main/roles/ssh/tasks/main.yml
 
-- name: Generate an SSH key pair
-  openssh_keypair:
-    path: "/home/{{ ansible_user }}/.ssh/id_ssh_ed25519"
-    type: ed25519
-  register: ssh_keypair
-
-- name: Install the existing public key
-  authorized_key:
-    user: "{{ ansible_user }}"
-    key: "{{ lookup('file', ssh_public_key) }}"
-
 - name: Update SSH configuration to be more secure
   register: ssh_config
   lineinfile:
@@ -35,6 +24,3 @@
       line: "X11Forwarding no"
   notify: restart-sshd
 
-- name: Set the ssh_role_ran fact
-  set_fact:
-    ssh_role_ran: true
