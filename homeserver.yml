@@ -25,9 +25,6 @@
     - name: Configure DDClient
       include_role:
         name: ddclient
-        apply:
-          tags: testing
-      tags: testing
 
     - name: Configure MkDocs
       include_role:
@@ -40,6 +37,13 @@
     - name: Configure Homer
       include_role:
         name: homer
+        apply:
+          tags: testing
+      tags: testing
+
+    - name: Uptime Kuma
+      include_role:
+        name: uptime-kuma
 
     - name: Configure Calibre
       include_role:
