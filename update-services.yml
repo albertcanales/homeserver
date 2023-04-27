@@ -22,15 +22,6 @@
         name: homeassistant
         tasks_from: update
 
-
-
-- hosts: homepi
-  gather_facts: true
-  become: true
-
-  vars_files:
-    - secret.yml
-
   tasks:
     - name: Upgrade Uptime Kuma
       include_role:

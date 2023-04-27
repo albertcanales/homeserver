@@ -1,0 +1,20 @@
+---
+- name: Configure Scrutiny container
+  docker_container:
+    name: scrutiny
+    image: ghcr.io/analogj/scrutiny:master-omnibus
+    restart_policy: unless-stopped
+    capabilities:
+      - SYS_RAWIO
+    env:
+      SCRUTINY_WEB_INFLUXDB_INIT_PASSWORD: "{{ scrutiny_db_password }}"
+    volumes:
+      - '/run/udev:/run/udev:ro'
+      - 'scrutiny-config:/opt/scrutiny/config'
+      - 'scrutiny-db:/opt/scrutiny/influxdb'
+    ports:
+      - '8085:8080' # webapp
+      - '8086:8086' # influxDB
+    devices:
+      - '/dev/sda'
+      - '/dev/sdb'

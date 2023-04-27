@@ -12,11 +12,10 @@
 
     - name: Ensure Data Drive is mounted
       mount:
-        src: /dev/sdb1
+        src: "UUID={{ data_uuid }}"
         path: "{{ data_path }}"
-        fstype: ntfs
+        fstype: ext4
         state: mounted
-        opts: permissions
 
     - name: Configure WG-Easy
       include_role:
@@ -29,17 +28,27 @@
     - name: Configure MkDocs
       include_role:
         name: mkdocs
+        apply:
+          tags: docs
+      tags: docs
 
     - name: Configure DockProm
       include_role:
         name: dockprom
 
+    - name: Configure Scrutiny
+      include_role:
+        name: scrutiny
+        apply:
+          tags: scrutiny
+      tags: scrutiny
+
     - name: Configure Homer
       include_role:
         name: homer
         apply:
-          tags: testing
-      tags: testing
+          tags: homer
+      tags: homer
 
     - name: Uptime Kuma
       include_role:
