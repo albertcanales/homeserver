@@ -25,6 +25,13 @@
       include_role:
         name: ddclient
 
+    - name: Configure Nginx Proxy Manager
+      include_role:
+        name: nginx-proxy-manager
+        apply:
+          tags: nginx
+      tags: nginx
+
     - name: Configure MkDocs
       include_role:
         name: mkdocs

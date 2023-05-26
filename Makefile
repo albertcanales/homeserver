@@ -1,4 +1,4 @@
-TAGS = docs homer scrutiny
+TAGS = docs homer scrutiny nginx
 
 all: $(TAGS)
 
