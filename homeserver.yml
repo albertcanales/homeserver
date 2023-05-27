@@ -88,10 +88,23 @@
     - name: Configure Radarr
       include_role:
         name: radarr
+        apply:
+          tags: arr
+      tags: arr
 
     - name: Configure Sonarr
       include_role:
         name: sonarr
+        apply:
+          tags: arr
+      tags: arr
+
+    - name: Configure Bazarr
+      include_role:
+        name: bazarr
+        apply:
+          tags: arr
+      tags: arr
 
     - name: Configure Overleaf
       include_role:
