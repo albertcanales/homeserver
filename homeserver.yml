@@ -20,6 +20,9 @@
     - name: Configure WG-Easy
       include_role:
         name: wg-easy
+        apply:
+          tags: wireguard
+      tags: wireguard
 
     - name: Configure DDClient
       include_role:

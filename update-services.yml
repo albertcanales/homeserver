@@ -22,7 +22,6 @@
         name: homeassistant
         tasks_from: update
 
-  tasks:
     - name: Upgrade Uptime Kuma
       include_role:
         name: uptime-kuma

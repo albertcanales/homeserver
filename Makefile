@@ -1,4 +1,4 @@
-TAGS = docs homer scrutiny nginx
+TAGS = docs homer wireguard scrutiny nginx arr
 
 all: $(TAGS)
 
