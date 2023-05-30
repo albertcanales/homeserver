@@ -1,0 +1,11 @@
+---
+- name: Backup config and database volumes
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - scrutiny-config
+      - scrutiny-db
+    container_name: scrutiny
+    image_name: ghcr.io/analogj/scrutiny

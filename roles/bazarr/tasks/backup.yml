@@ -1,0 +1,10 @@
+---
+- name: Backup config volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - bazarr-config
+    container_name: bazarr
+    image_name: lscr.io/linuxserver/bazarr
