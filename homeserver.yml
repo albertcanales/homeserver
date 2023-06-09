@@ -84,6 +84,13 @@
       include_role:
         name: freshrss
 
+    - name: Configure PufferPanel
+      include_role:
+        name: pufferpanel
+        apply:
+          tags: games
+      tags: games
+
     - name: Configure Deluge
       include_role:
         name: deluge

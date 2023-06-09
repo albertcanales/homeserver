@@ -1,0 +1,14 @@
+---
+- name: Configure PufferPanel container
+  docker_container:
+    name: pufferpanel
+    image: pufferpanel/pufferpanel
+    restart_policy: on-failure
+    ports:
+      - '8001:8080'
+      - '5657:5657'
+      - '10000-10100:10000-10100'
+    volumes:
+      - 'pufferpanel-config:/etc/pufferpanel'
+      - 'pufferpanel-data:/var/lib/pufferpanel'
+      - '/var/run/docker.sock:/var/run/docker.sock'
