@@ -81,6 +81,8 @@
         - overleaf
         - radarr
         - sonarr
+        - bazarr
+        - prowlarr
         - wg-easy
       when: backup_containers
 
