@@ -1,0 +1,14 @@
+---
+- name: Configure Prowlarr container
+  docker_container:
+    name: prowlarr
+    image: lscr.io/linuxserver/prowlarr
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'prowlarr-config:/config'
+    ports:
+      - '9696:9696'

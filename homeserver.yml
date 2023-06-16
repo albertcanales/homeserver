@@ -116,6 +116,13 @@
           tags: arr
       tags: arr
 
+    - name: Configure Prowlarr
+      include_role:
+        name: prowlarr
+        apply:
+          tags: arr
+      tags: arr
+
     - name: Configure Overleaf
       include_role:
         name: overleaf
