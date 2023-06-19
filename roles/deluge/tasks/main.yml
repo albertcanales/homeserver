@@ -11,7 +11,7 @@
       DELUGE_LOGLEVEL: 'error'
     volumes:
       - 'deluge-config:/config'
-      - '{{ data_path }}/media/downloads:/downloads'
+      - '{{ downloads_path }}:/downloads'
     ports:
       - '8112:8112'
       - '6881:6881'

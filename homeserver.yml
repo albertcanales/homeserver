@@ -5,9 +5,6 @@
   vars_files:
     - secret.yml
 
-  vars:
-    data_path: /data
-
   tasks:
 
     - name: Ensure Data Drive is mounted

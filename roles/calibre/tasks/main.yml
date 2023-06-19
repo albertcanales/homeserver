@@ -15,4 +15,4 @@
       OAUTHLIB_RELAX_TOKEN_SCOPE: '1'
     volumes:
       - 'calibre-config:/config'
-      - '{{ data_path }}/media/books:/books'
+      - '{{ books_path }}:/books'

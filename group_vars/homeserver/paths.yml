@@ -1,0 +1,10 @@
+---
+data_path: "/data"
+backup_path: "/backup"
+
+books_path: "{{ data_path }}/media/books"
+docs_path: "{{ data_path }}/docs"
+downloads_path: "{{ data_path }}/media/downloads"
+files_path: "{{ data_path }}/files"
+movies_path: "{{ data_path }}/media/movies"
+shows_path: "{{ data_path }}/media/shows"

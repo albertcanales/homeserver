@@ -7,8 +7,6 @@
     - secret.yml
 
   vars:
-    data_path: /data
-    backup_path: /backup
     backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
     timestamped_backup: false
     backup_files: true
@@ -58,7 +56,7 @@
     
     - name: Backup files directory
       synchronize:
-        src: "{{ data_path }}/files"
+        src: "{{ files_path }}"
         dest: "{{ backup_path }}"
       delegate_to: "{{ inventory_hostname }}"
       when: backup_files

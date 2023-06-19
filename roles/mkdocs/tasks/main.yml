@@ -3,7 +3,7 @@
 - name: Pull the documentation repository
   git:
     repo: "https://oauth2:{{ github_fine_token }}@github.com/{{ repo_owner }}/{{ repo_name }}.git"
-    dest: "{{ data_path }}/docs"
+    dest: "{{ docs_path }}"
   register: docs_repo
 
 - name: Configure MkDocs container
@@ -19,4 +19,4 @@
     ports:
       - '8000:8000'
     volumes:
-      - '{{ data_path }}/docs:/mkdocs'
+      - '{{ docs_path }}:/mkdocs'

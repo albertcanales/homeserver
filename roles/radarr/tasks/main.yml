@@ -10,7 +10,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'radarr-config:/config'
-      - '{{ data_path }}/media/movies:/movies'
-      - '{{ data_path }}/media/downloads:/downloads'
+      - '{{ movies_path }}:/movies'
+      - '{{ downloads_path }}:/downloads'
     ports:
       - '7878:7878'

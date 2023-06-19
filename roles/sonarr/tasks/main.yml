@@ -10,7 +10,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'sonarr-config:/config'
-      - '{{ data_path }}/media/shows:/tv'
-      - '{{ data_path }}/media/downloads:/downloads'
+      - '{{ shows_path }}:/tv'
+      - '{{ downloads_path }}:/downloads'
     ports:
       - '8989:8989'

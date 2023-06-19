@@ -12,7 +12,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'jellyfin-config:/config'
-      - '{{ data_path }}/media/shows:/data/shows'
-      - '{{ data_path }}/media/movies:/data/movies'
+      - '{{ shows_path }}:/data/shows'
+      - '{{ movies_path }}:/data/movies'
     ports:
       - '8096:8096'

@@ -11,4 +11,4 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'homeassistant-config:/config'
-      - '{{ data_path }}/media/books:/books'
+      - '{{ books_path }}:/books'

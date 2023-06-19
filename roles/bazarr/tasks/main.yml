@@ -13,7 +13,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'bazarr-config:/config'
-      - '{{ data_path }}/media/shows:/tv'
-      - '{{ data_path }}/media/movies:/movies'
+      - '{{ shows_path }}:/tv'
+      - '{{ movies_path }}:/movies'
     ports:
       - '6767:6767'
