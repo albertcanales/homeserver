@@ -1,4 +1,7 @@
 ---
+# Further configuration based on this video:
+# https://www.youtube.com/watch?v=Kuaa1JBNYhk
+
 - name: Configure Bazarr container
   docker_container:
     name: bazarr

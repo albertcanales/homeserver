@@ -1,4 +1,7 @@
 ---
+# Further configuration based on this video (great channel btw):
+# https://youtu.be/qlcVx-k-02E
+
 - name: Configure Nginx Proxy Manager container
   docker_container:
     name: nginx-proxy-manager

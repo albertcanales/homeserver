@@ -1,4 +1,7 @@
 ---
+# Further configuration based this post:
+# https://yams.media/config/prowlarr/
+
 - name: Configure Prowlarr container
   docker_container:
     name: prowlarr

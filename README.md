@@ -1,4 +1,4 @@
-This repository contains the Ansible playbooks I use for managing my home server.
+This repository contains the Ansible playbooks I use for managing my home servers.
 
 As it is for personal use, features can be added, modified or deleted on master upon personal preference, beware of pulling.
 
@@ -74,6 +74,10 @@ Finally, update the hosts file to your particular use case. Keep in mind that ma
 With the installation completed, you just have to run one of the three playbooks, depending on which machines you want to configure:
 
 	ansible-playbook PLAYBOOK
+
+For convenience, some common services can be run through a Makefile. All available targets can be checked with:
+
+	make list
 
 ## Documentation
 
