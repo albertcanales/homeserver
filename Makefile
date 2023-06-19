@@ -1,9 +1,13 @@
-TAGS = docs homer wireguard scrutiny nginx arr
+HOMESERVER_TAGS = docs homer vpn nginx arr
+TORRESERVER_TAGS =
 
-all: $(TAGS)
+all: $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
 
 list:
-	@echo $(TAGS)
+	@echo $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
 
-$(TAGS):
-	ansible-playbook main.yml -t $@
+$(HOMESERVER_TAGS):
+	ansible-playbook main.yml -t $@ --limit 'homeserver'
+
+$(TORRESERVER_TAGS):
+	ansible-playbook main.yml -t $@ --limit 'torreserver'
