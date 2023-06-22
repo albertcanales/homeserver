@@ -2,9 +2,6 @@
 - name: Basic configuration for all hosts
   hosts: all
   become: true
-
-  vars_files:
-    - secret.yml
   
   vars:
       pip_install_packages:
@@ -15,6 +12,13 @@
     - geerlingguy.pip
     - geerlingguy.docker
     - ssh
+
+  tasks:
+
+    - name: Apply laptop configuration
+      include_role:
+        name: laptop
+      when: is_laptop | default(false)
 
 - import_playbook: homeserver.yml
 - import_playbook: torreserver.yml

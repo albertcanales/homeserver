@@ -3,32 +3,4 @@
   hosts: torreserver
   become: true
 
-  vars_files:
-    - secret.yml
-
   tasks:
-    - name: Avoid suspension when closing lid
-      lineinfile:
-        dest: /etc/systemd/logind.conf
-        regexp: "{{ item.regexp }}"
-        line: "{{ item.line }}"
-        state: present
-      with_items:
-        - regexp: "^#?HandleLidSwitch="
-          line: "HandleLidSwitch=ignore"
-        - regexp: "^#?HandleLidSwitchExternalPower="
-          line: "HandleLidSwitchExternalPower=ignore"
-        - regexp: "^#?HandleLidSwitchDocked="
-          line: "HandleLidSwitchDocked=ignore"
-        - regexp: "^#?LidSwitchIgnoreInhibited="
-          line: "LidSwitchIgnoreInhibited=no"
-      notify: restart-logind
-  
-  handlers:
-    - name: restart-logind
-      service:
-        name: systemd-logind
-        state: restarted
-
-  
-
