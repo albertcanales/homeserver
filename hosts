@@ -1,18 +1,5 @@
 [homeserver]
 192.168.1.29
 
-[homeserver:vars]
-ansible_become_pass="{{ homeserver_become_pass }}"
-
 [torreserver]
 192.168.100.101
-
-[torreserver:vars]
-ansible_become_pass="{{ torreserver_become_pass }}"
-
-[all:vars]
-ansible_connection=ssh
-ansible_user=albert
-ansible_port=22
-timezone="Europe/Madrid"
-ssh_public_key="/home/albert/.ssh/id_ed25519.pub"

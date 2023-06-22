@@ -2,9 +2,6 @@
   hosts: homeserver
   become: true
 
-  vars_files:
-    - secret.yml
-
   tasks:
 
     - name: Ensure Data Drive is mounted

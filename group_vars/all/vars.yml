@@ -1,0 +1,4 @@
+ansible_connection: ssh
+ansible_user: albert
+ansible_port: 22
+timezone: "Europe/Madrid"
