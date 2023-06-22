@@ -10,12 +10,20 @@ create_secret:
 	./create_secret.sh
 
 encrypt_secret:
+	for secret in group_vars/*/secret.yml ; do \
+	    echo -n "Encrypting $$secret -> " ; \
+	    ansible-vault encrypt $$secret ; \
+	done
 	for secret in roles/*/vars/main/secret.yml ; do \
 	    echo -n "Encrypting $$secret -> " ; \
 	    ansible-vault encrypt $$secret ; \
 	done
 
 decrypt_secret:
+	for secret in group_vars/*/secret.yml ; do \
+	    echo -n "Decrypting $$secret -> " ; \
+	    ansible-vault decrypt $$secret ; \
+	done
 	for secret in roles/*/vars/main/secret.yml ; do \
 	    echo -n "Decrypting $$secret -> " ; \
 	    ansible-vault decrypt $$secret ; \
