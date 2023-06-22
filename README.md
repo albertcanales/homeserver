@@ -19,55 +19,32 @@ Inside the latter two, one can easily see which services are hosted into each ma
 
 ## Installation
 
-This repository (as other Ansible playbooks) requires Ansible installed on the Control Node. It is widely available in package managers.
+This repository (as well as other Ansible playbooks) requires Ansible installed on the Control Node. It is widely available in package managers.
 
-Inside the cloned repo, install the Ansible requirements with:
+#### Requirements and inventory
+
+Inside the cloned repo, install the Ansible requirements on the control node with:
 
 	ansible-galaxy install -r requirements.yml
 
-Then create a secret file with Ansible Vault:
+Now, modify the hosts file to reflect your machines' information.
 
-	ansible-vault create secret.yml
+#### Variables and secrets
 
-And, if to avoid typing the password each time, store it in a file named `vault_file`.
+Variables used by Ansible are defined in `group_vars/<group>` and `roles/<role_name>/vars/main` (although not all roles have variables). After cloning the repo, only a few values will show up, as most of them are protected using *ansible_vault*.
 
-Then populate the secrets file with the following variables (check playbooks for usage):
+To avoid making you create all these variables yourself, the needed templates are provided in `group_vars/<group>_secret_base.yml` and `roles/<role_name>/vars/secret_base.yml`. These files are ignored by Ansible. Use the command
 
-```yaml
-### all
-github_deploy_token:
+	make create_secret
 
-### home pi
-homepi_become_pass:
+to automatically generate a copy of each template into the corresponding `secret.yml` file, which will be processed by Ansible. Now you can populate all variables with your data.
 
-# wg-easy
-ddns_endpoint:
-wg_easy_password:
+To encrypt and decrypt this data using *ansible-vault*, you will also need a file called `vault_file` containing the vault password. This functionality can be changed inside `ansible.cfg`.
 
-# pihole
-pihole_password:
+Finally, in order to encrypt and decrypt all the secret files, you can use:
 
-### home server
-homeserver_become_pass:
-data_uuid:
-
-# nextcloud
-nextcloud_root_db_password:
-nextcloud_db_password:
-
-# overleaf
-mail_user:
-mail_pass:
-
-# tailscale
-tailscale_auth_key:
-home_network:
-
-### torreserver
-torreserver_become_pass:
-```
-
-Finally, update the hosts file to your particular use case. Keep in mind that manual configuration for static IP, port-forwading and DDNS may be required on your router.
+	make encrypt_secret
+	make decrypt_secret
 
 ## Usage
 
