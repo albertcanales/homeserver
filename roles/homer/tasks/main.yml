@@ -14,12 +14,22 @@
     name: homer-assets
   register: homer_volume
 
-- name: Copy icons to assets
+# The icons are copied in two steps because the
+# copy module is really slow on local -> remote
+
+- name: Copy icons into home directory
+  synchronize:
+    src: icons/
+    dest: "/home/{{ ansible_user }}/homer-icons/"
+  become: false
+
+- name: Copy icons into assets directory
   copy:
-    src: icons
-    dest: "{{ homer_volume.volume.Mountpoint }}"
+    src: "/home/{{ ansible_user }}/homer-icons/"
+    dest: "{{ homer_volume.volume.Mountpoint }}/icons"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
+    remote_src: true
 
 - name: Copy config template to assets
   template:
