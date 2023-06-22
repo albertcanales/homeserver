@@ -20,6 +20,7 @@
         apply:
           tags: wireguard
       tags: wireguard
+      when: false
 
     - name: Configure DDClient
       include_role:
