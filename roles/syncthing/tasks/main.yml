@@ -1,0 +1,20 @@
+---
+- name: Configure Syncthing container
+  docker_container:
+    name: syncthing
+    image: lscr.io/linuxserver/syncthing
+    restart_policy: unless-stopped
+    devices:
+      - '/dev/dri:/dev/dri'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'syncthing-config:/config'
+      - '{{ sync_path }}:/config/Data'
+    ports:
+      - '8384:8384'
+      - '22000:22000/tcp'
+      - '22000:22000/udp'
+      - '21027:21027/udp'

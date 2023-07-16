@@ -71,6 +71,13 @@
       include_role:
         name: nextcloud
 
+    - name: Configure Syncthing
+      include_role:
+        name: syncthing
+        apply:
+          tags: syncthing
+      tags: syncthing
+
     - name: Configure Home Assistant
       include_role:
         name: homeassistant
