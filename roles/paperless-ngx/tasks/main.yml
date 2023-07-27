@@ -1,0 +1,16 @@
+---
+- name: Configure Paperless-ngx container
+  docker_container:
+    name: paperless-ngx
+    image: lscr.io/linuxserver/paperless-ngx
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+      PAPERLESS_URL: "https://paperless.{{ public_url }}"
+    volumes:
+      - 'paperless-ngx-config:/config'
+      - '{{ scans_path }}:/scans'
+    ports:
+      - '8500:8000'

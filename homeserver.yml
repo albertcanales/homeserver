@@ -93,6 +93,13 @@
           tags: games
       tags: games
 
+    - name: Configure Paperless
+      include_role:
+        name: paperless-ngx
+        apply:
+          tags: paperless
+      tags: paperless
+
     - name: Configure Deluge
       include_role:
         name: deluge

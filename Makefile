@@ -1,4 +1,4 @@
-HOMESERVER_TAGS = docs homer vpn nginx syncthing arr
+HOMESERVER_TAGS = docs homer vpn nginx syncthing paperless arr
 TORRESERVER_TAGS =
 
 all: $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
