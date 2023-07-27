@@ -104,6 +104,13 @@
           tags: arr
       tags: arr
 
+    - name: Configure Readarr
+      include_role:
+        name: readarr
+        apply:
+          tags: arr
+      tags: arr
+
     - name: Configure Sonarr
       include_role:
         name: sonarr

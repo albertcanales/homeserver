@@ -1,0 +1,10 @@
+---
+- name: Backup config volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - readarr-config
+    container_name: readarr
+    image_name: lscr.io/linuxserver/readarr
