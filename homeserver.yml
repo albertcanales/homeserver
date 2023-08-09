@@ -142,3 +142,10 @@
     - name: Configure Overleaf
       include_role:
         name: overleaf
+
+    - name: Configure Gitea
+      include_role:
+        name: gitea
+        apply:
+          tags: gitea
+      tags: gitea
