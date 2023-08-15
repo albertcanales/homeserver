@@ -1,4 +1,13 @@
-This repository contains the Ansible playbooks I use for managing my home servers.
+
+<h1 align="center">
+	HomeServer with Ansible
+</h1>
+
+<p align="center">
+  <img src="img/dashboard.png" alt="Dashboard of running services"/>
+</p>
+
+This repository contains the Ansible playbooks I use for managing my home server.
 
 As it is for personal use, features can be added, modified or deleted on master upon personal preference, beware of pulling.
 
