@@ -1,6 +1,5 @@
 ---
-# This service is not currently used and might not work
-
+# UNUSED! This service is no longer used, so it may not work
 - name: Configure PiHole Container
   docker_container:
     name: pihole

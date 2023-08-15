@@ -1,4 +1,5 @@
 ---
+# UNUSED! This service is no longer used, so it may not work
 - name: Configure WG Easy Container
   docker_container:
     name: wg-easy

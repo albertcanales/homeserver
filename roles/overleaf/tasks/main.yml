@@ -1,6 +1,8 @@
+---
+# UNUSED! This service is no longer used, so it may not work
+
 # Based on the docker compose file by Overleaf
 # https://github.com/overleaf/overleaf/blob/main/docker-compose.yml
-
 - name: Configure Overleaf container
   docker_compose:
     project_name: overleaf

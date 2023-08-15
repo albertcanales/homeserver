@@ -1,4 +1,5 @@
 ---
+# UNUSED! This service is no longer used, so it may not work
 - name: Configure FreshRSS container
   docker_container:
     name: freshrss
