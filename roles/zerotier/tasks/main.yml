@@ -1,0 +1,14 @@
+---
+- name: Configure ZeroTier container
+  docker_container:
+    name: zerotier
+    image: zyclonite/zerotier
+    restart_policy: unless-stopped
+    network_mode: host
+    devices:
+      - /dev/net/tun
+    capabilities:
+      - NET_ADMIN
+      - SYS_ADMIN
+    volumes:
+      - 'zerotier-data:/var/lib/zerotier-one'
