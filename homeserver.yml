@@ -11,141 +11,116 @@
         fstype: ext4
         state: mounted
 
-    - name: Configure WG-Easy
-      include_role:
-        name: wg-easy
-        apply:
-          tags: wireguard
-      tags: wireguard
-      when: false
-
-    - name: Configure DDClient
-      include_role:
-        name: ddclient
-
-    - name: Configure Nginx Proxy Manager
-      include_role:
-        name: nginx-proxy-manager
-        apply:
-          tags: nginx
-      tags: nginx
-
-    - name: Configure MkDocs
-      include_role:
-        name: mkdocs
-        apply:
-          tags: docs
-      tags: docs
-
-    - name: Configure DockProm
-      include_role:
-        name: dockprom
-
-    - name: Configure Scrutiny
-      include_role:
-        name: scrutiny
-        apply:
-          tags: scrutiny
-      tags: scrutiny
-
-    - name: Configure Homer
+    - name: Configure Homer dashboard
       include_role:
         name: homer
         apply:
           tags: homer
       tags: homer
 
-    - name: Uptime Kuma
+    - name: Configure Mkdocs documentation
       include_role:
-        name: uptime-kuma
-
-    - name: Configure Calibre
-      include_role:
-        name: calibre
-
-    - name: Configure Jellyfin
-      include_role:
-        name: jellyfin
-
-    - name: Configure Nextcloud
-      include_role:
-        name: nextcloud
-
-    - name: Configure Syncthing
-      include_role:
-        name: syncthing
+        name: mkdocs
         apply:
-          tags: syncthing
-      tags: syncthing
+          tags: docs
+      tags: docs
 
-    - name: Configure Home Assistant
-      include_role:
-        name: homeassistant
+    - name: Configure Administration services
+      block:
+        - name: Configure ZeroTier
+          include_role:
+            name: zerotier
 
-    - name: Configure FreshRSS
-      include_role:
-        name: freshrss
+        - name: Configure Nginx Proxy Manager
+          include_role:
+            name: nginx-proxy-manager
 
-    - name: Configure PufferPanel
-      include_role:
-        name: pufferpanel
-        apply:
-          tags: games
-      tags: games
+        - name: Configure DockProm
+          include_role:
+            name: dockprom
 
-    - name: Configure Paperless
-      include_role:
-        name: paperless-ngx
-        apply:
-          tags: paperless
-      tags: paperless
+        - name: Configure Scrutiny
+          include_role:
+            name: scrutiny
 
-    - name: Configure Deluge
-      include_role:
-        name: deluge
+        - name: Uptime Kuma
+          include_role:
+            name: uptime-kuma
+      tags: admin
 
-    - name: Configure Radarr
-      include_role:
-        name: radarr
-        apply:
+    - name: Configure Media managment services
+      block:
+        - name: Configure Syncthing
+          include_role:
+            name: syncthing
+
+        - name: Configure Deluge
+          include_role:
+            name: deluge
+
+        - name: Configure Sonarr
+          include_role:
+            name: sonarr
+            apply:
+              tags: arr
           tags: arr
-      tags: arr
-
-    - name: Configure Readarr
-      include_role:
-        name: readarr
-        apply:
+          
+        - name: Configure Radarr
+          include_role:
+            name: radarr
+            apply:
+              tags: arr
           tags: arr
-      tags: arr
 
-    - name: Configure Sonarr
-      include_role:
-        name: sonarr
-        apply:
+        - name: Configure Readarr
+          include_role:
+            name: readarr
+            apply:
+              tags: arr
           tags: arr
-      tags: arr
 
-    - name: Configure Bazarr
-      include_role:
-        name: bazarr
-        apply:
+        - name: Configure Bazarr
+          include_role:
+            name: bazarr
+            apply:
+              tags: arr
           tags: arr
-      tags: arr
 
-    - name: Configure Prowlarr
-      include_role:
-        name: prowlarr
-        apply:
+        - name: Configure Prowlarr
+          include_role:
+            name: prowlarr
+            apply:
+              tags: arr
           tags: arr
-      tags: arr
+      tags: media
 
-    - name: Configure Overleaf
-      include_role:
-        name: overleaf
+    - name: Configure Application services
+      block:
+        - name: Configure Nextcloud
+          include_role:
+            name: nextcloud
 
-    - name: Configure Gitea
-      include_role:
-        name: gitea
-        apply:
-          tags: gitea
-      tags: gitea
+        - name: Configure Jellyfin
+          include_role:
+            name: jellyfin
+
+        - name: Configure Calibre
+          include_role:
+            name: calibre
+
+        - name: Configure Home Assistant
+          include_role:
+            name: homeassistant
+
+        - name: Configure PufferPanel
+          include_role:
+            name: pufferpanel
+
+        - name: Configure Paperless
+          include_role:
+            name: paperless-ngx
+
+        - name: Configure Gitea
+          include_role:
+            name: gitea
+      tags: app

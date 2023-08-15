@@ -1,10 +1,17 @@
-HOMESERVER_TAGS = docs homer vpn nginx syncthing paperles arr gitea
+HOMESERVER_TAGS = homer docs admin media arr app
 TORRESERVER_TAGS =
 
-all: $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
+all:
+	ansible-playbook main.yml
+
+homeserver:
+	ansible-playbook homeserver.yml
+
+torreserver:
+	ansible-playbook torreserver.yml
 
 list:
-	@echo $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
+	@echo all homeserver torreserver $(HOMESERVER_TAGS) $(TORRESERVER_TAGS)
 
 create_secret:
 	./create_secret.sh
