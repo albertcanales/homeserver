@@ -1,0 +1,11 @@
+---
+- name: Backup config volumes
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - pufferpanel-config
+      - pufferpanel-data
+    container_name: pufferpanel
+    image_name: pufferpanel/pufferpanel

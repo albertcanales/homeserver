@@ -1,0 +1,10 @@
+---
+- name: Backup data volume
+  include_role:
+    name: my_docker
+    tasks_from: backup_volumes
+  vars:
+    volume_names:
+      - uptime-kuma
+    container_name: uptime-kuma
+    image_name: louislam/uptime-kuma
