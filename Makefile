@@ -41,3 +41,6 @@ $(HOMESERVER_TAGS):
 
 $(TORRESERVER_TAGS):
 	ansible-playbook main.yml -t $@ --limit 'torreserver'
+
+backup:
+	ansible-playbook backup.yml

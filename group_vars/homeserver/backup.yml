@@ -1,0 +1,66 @@
+---
+# Path for backup
+backup_path: /data/backup
+
+# Mount a drive for backup
+mount_backup_drive: false
+backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
+backup_drive_path: /backup
+
+# If Backup directory should have timestamp on it
+timestamped_backup: false
+
+# If containers' volumes should be backed up
+backup_containers: false
+# If containers should be stopped and restarted
+# before and after copying their volumes
+container_start_stop: true
+# List of containers to back up
+containers: []
+
+ignored_containers:
+  - bazarr
+  - calibre
+  - deluge
+  - dockprom
+  - freshrss
+  - gitea
+  - homeassistant
+  - jellyfin
+  - nextcloud
+  - nginx-proxy-manager
+  - overleaf
+  - paperless-ngx
+  - prowlarr
+  - pufferpanel
+  - radarr
+  - readarr
+  - scrutiny
+  - sonarr
+  - syncthing
+  - uptime-kuma
+  - zerotier
+
+# Which additional directories (data directories) should be backed up 
+backup_directories:
+  - name: books
+    should_backup: false
+    path: "{{ books_path }}"
+  - name: files
+    should_backup: false
+    path: "{{ files_path }}"
+  - name: sync
+    should_backup: false
+    path: "{{ sync_path }}"
+  - name: scans
+    should_backup: false
+    path: "{{ scans_path }}"
+  - name: movies
+    should_backup: false
+    path: "{{ movies_path }}"
+  - name: shows
+    should_backup: false
+    path: "{{ shows_path }}"
+  - name: downloads
+    should_backup: false
+    path: "{{ downloads_path }}"
