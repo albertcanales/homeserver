@@ -56,7 +56,7 @@
 
     - name: Create data directories
       file:
-        path: "{{ backup_path }}/{{ item.name }}"
+        path: "{{ backup_dest }}/{{ item.name }}"
         state: directory
       with_items: "{{ backup_directories }}"
       when: item.should_backup
@@ -64,13 +64,13 @@
     - name: Backup data directories
       synchronize:
         src: "{{ item.path }}"
-        dest: "{{ backup_path }}"
+        dest: "{{ backup_dest }}"
       delegate_to: "{{ inventory_hostname }}"
       with_items: "{{ backup_directories }}"
       when: item.should_backup
 
     - name: Ensure Backup Drive is unmounted
       mount:
-        path: "{{ backup_path }}"
+        path: "{{ backup_drive_path }}"
         state: unmounted
       when: mount_backup_drive

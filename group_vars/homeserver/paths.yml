@@ -1,6 +1,5 @@
 ---
 data_path: "/data"
-backup_path: "/backup"
 
 books_path: "{{ data_path }}/media/books"
 docs_path: "{{ data_path }}/docs"
