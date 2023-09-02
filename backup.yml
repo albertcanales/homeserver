@@ -7,12 +7,36 @@
     - secret.yml
 
   vars:
+    mount_backup_drive: false
     backup_drive_uuid: 43a4c0a8-e533-4900-a2ee-78ea51d80de8
+    backup_path: /data/backup
     timestamped_backup: false
-    backup_files: true
+    backup_files: false
     backup_containers: false
-    backup_media: false
     container_start_stop: true
+    backup_directories:
+      - name: books
+        should_backup: true
+        path: "{{ books_path }}"
+      - name: files
+        should_backup: true
+        path: "{{ files_path }}"
+      - name: sync
+        should_backup: true
+        path: "{{ sync_path }}"
+      - name: scans
+        should_backup: true
+        path: "{{ scans_path }}"
+      - name: movies
+        should_backup: false
+        path: "{{ movies_path }}"
+      - name: shows
+        should_backup: false
+        path: "{{ shows_path }}"
+      - name: downloads
+        should_backup: false
+        path: "{{ downloads_path }}"
+    
 
   tasks:
     - name: Ensure Backup Drive is mounted
@@ -22,6 +46,13 @@
         fstype: ext4
         boot: false
         state: mounted
+      when: mount_backup_drive
+
+    - name: Ensure Backup directory exists
+      file:
+        path: "{{ backup_path }}"
+        state: directory
+      when: not mount_backup_drive
 
     - name: Get Backup Timestamp
       shell: date +%Y-%m-%d-%H-%M
@@ -60,7 +91,6 @@
         dest: "{{ backup_path }}"
       delegate_to: "{{ inventory_hostname }}"
       when: backup_files
-    #
 
     # Backup container volumes
 
@@ -81,26 +111,27 @@
         - sonarr
         - bazarr
         - prowlarr
-        - wg-easy
       when: backup_containers
 
     # Backup media directory
 
-    - name: Create media directory
+    - name: Create data directories
       file:
-        path: "{{ backup_path }}/media"
+        path: "{{ backup_path }}/{{ item.name }}"
         state: directory
-      when: backup_media
+      with_items: "{{ backup_directories }}"
+      when: item.should_backup
     
-    - name: Backup media directory
+    - name: Backup data directories
       synchronize:
-        src: "{{ data_path }}/media"
+        src: "{{ item.path }}"
         dest: "{{ backup_path }}"
       delegate_to: "{{ inventory_hostname }}"
-      when: backup_media
-    #
+      with_items: "{{ backup_directories }}"
+      when: item.should_backup
 
     - name: Ensure Backup Drive is unmounted
       mount:
         path: "{{ backup_path }}"
         state: unmounted
+      when: mount_backup_drive
