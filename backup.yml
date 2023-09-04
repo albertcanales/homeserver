@@ -15,6 +15,7 @@
         boot: false
         state: mounted
       when: mount_backup_drive
+      tags: mount
 
     - name: Ensure Backup directory exists
       file:
@@ -74,3 +75,4 @@
         path: "{{ backup_drive_path }}"
         state: unmounted
       when: mount_backup_drive
+      tags: unmount
