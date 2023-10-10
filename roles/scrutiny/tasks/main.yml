@@ -18,4 +18,3 @@
     devices:
       - '/dev/sda'
       - '/dev/sdb'
-      - '/dev/sdc'

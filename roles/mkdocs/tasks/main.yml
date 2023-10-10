@@ -5,6 +5,7 @@
     repo: "https://oauth2:{{ github_fine_token }}@github.com/{{ repo_owner }}/{{ repo_name }}.git"
     dest: "{{ docs_path }}"
   register: docs_repo
+  when: false
 
 - name: Configure MkDocs container
   docker_container:
