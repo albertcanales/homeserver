@@ -8,9 +8,24 @@
 		reverse_proxy 192.168.1.29:8080
 	}
 
+	@bazarr host bazarr.{{ public_url }}
+	handle @bazarr {
+		reverse_proxy 192.168.1.29:6767
+	}
+
 	@calibre host calibre.{{ public_url }}
 	handle @calibre {
 		reverse_proxy 192.168.1.29:8083
+	}
+
+	@deluge host deluge.{{ public_url }}
+	handle @deluge {
+		reverse_proxy 192.168.1.29:8112
+	}
+
+	@dockprom host dockprom.{{ public_url }}
+	handle @dockprom {
+		reverse_proxy 192.168.1.29:3000
 	}
 
 	@docs host docs.{{ public_url }}
@@ -33,6 +48,11 @@
 		reverse_proxy 192.168.1.29:8096
 	}
 
+	@kuma host kuma.{{ public_url }}
+	handle @kuma {
+		reverse_proxy 192.168.1.29:3001
+	}
+
 	@nextcloud host nextcloud.{{ public_url }}
 	handle @nextcloud {
 		reverse_proxy 192.168.1.29:500
@@ -43,14 +63,43 @@
 		reverse_proxy 192.168.1.29:8500
 	}
 
+	@prowlarr host prowlarr.{{ public_url }}
+	handle @prowlarr {
+		reverse_proxy 192.168.1.29:9696
+	}
+
 	@puffer host puffer.{{ public_url }}
 	handle @puffer {
 		reverse_proxy 192.168.1.29:8001
 	}
 
+	@radarr host radarr.{{ public_url }}
+	handle @radarr {
+		reverse_proxy 192.168.1.29:7878
+	}
+
+	@readarr host readarr.{{ public_url }}
+	handle @readarr {
+		reverse_proxy 192.168.1.29:8787
+	}
+
+	@scrutiny host scrutiny.{{ public_url }}
+	handle @scrutiny {
+		reverse_proxy 192.168.1.29:8085
+	}
+
+	@sonarr host sonarr.{{ public_url }}
+	handle @sonarr {
+		reverse_proxy 192.168.1.29:8989
+	}
+
+	@syncthing host syncthing.{{ public_url }}
+	handle @syncthing {
+		reverse_proxy 192.168.1.29:3334
+	}
+
 	# Fallback for otherwise unhandled domains
 	handle {
-		abort
-		# redir https://{{ public_url }}
+		redir https://{{ public_url }}
 	}
 }
