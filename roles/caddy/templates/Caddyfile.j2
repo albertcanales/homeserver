@@ -1,0 +1,15 @@
+{{ public_url }}, *.{{ public_url }} {
+	tls {
+		dns duckdns {{ duckdns_api_token }}
+	}
+
+	@jellyfin host jellyfin.{{ public_url }}
+	handle @jellyfin {
+		reverse_proxy 192.168.1.29:8096
+	}
+
+	# Fallback for otherwise unhandled domains
+	handle {
+		reverse_proxy 192.168.1.29:8080
+	}
+}

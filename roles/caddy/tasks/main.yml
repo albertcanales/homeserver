@@ -1,0 +1,59 @@
+---
+- name: Create build directory
+  file:
+    path: /root/caddy-dockerfile
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: /root/caddy-dockerfile/Dockerfile
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Build the Caddy with DuckDNS image
+  docker_image:
+    build:
+      path: /root/caddy-dockerfile
+    name: caddy-duckdns
+    source: build
+
+- name: Configure Caddy container
+  docker_container:
+    name: caddy
+    image: caddy-duckdns
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    env:
+      DOCKER_MODS: 'linuxserver/mods:universal-calibre'
+      OAUTHLIB_RELAX_TOKEN_SCOPE: '1'
+    volumes:
+      - 'caddy-configuration:/etc/caddy'
+      - 'caddy-data:/data'
+      - 'caddy-config:/config'
+
+- name: Get Caddy configuration volume info
+  docker_volume_info:
+    name: caddy-configuration
+  register: configuration_volume
+
+- name: Template the caddyfile into the configuration directory
+  template:
+    src: Caddyfile.j2
+    dest: "{{ configuration_volume.volume.Mountpoint }}/Caddyfile"
+  register: caddyfile
+
+- name: Reload Caddy
+  community.docker.docker_container_exec:
+    container: caddy
+    command: caddy reload
+    chdir: /etc/caddy
+  when: caddyfile.changed

@@ -31,9 +31,12 @@
           include_role:
             name: zerotier
 
-        - name: Configure Nginx Proxy Manager
+        - name: Configure Caddy
           include_role:
-            name: nginx-proxy-manager
+            name: caddy
+            apply:
+              tags: test
+          tags: test
 
         - name: Configure DockProm
           include_role:
