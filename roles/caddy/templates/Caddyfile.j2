@@ -3,13 +3,54 @@
 		dns duckdns {{ duckdns_api_token }}
 	}
 
+	@dashboard host {{ public_url }}
+	handle @dashboard {
+		reverse_proxy 192.168.1.29:8080
+	}
+
+	@calibre host calibre.{{ public_url }}
+	handle @calibre {
+		reverse_proxy 192.168.1.29:8083
+	}
+
+	@docs host docs.{{ public_url }}
+	handle @docs {
+		reverse_proxy 192.168.1.29:8000
+	}
+
+	@gitea host gitea.{{ public_url }}
+	handle @gitea {
+		reverse_proxy 192.168.1.29:3333
+	}
+
+	@home host home.{{ public_url }}
+	handle @home {
+		reverse_proxy 192.168.1.29:8123
+	}
+
 	@jellyfin host jellyfin.{{ public_url }}
 	handle @jellyfin {
 		reverse_proxy 192.168.1.29:8096
 	}
 
+	@nextcloud host nextcloud.{{ public_url }}
+	handle @nextcloud {
+		reverse_proxy 192.168.1.29:500
+	}
+
+	@paperless host paperless.{{ public_url }}
+	handle @paperless {
+		reverse_proxy 192.168.1.29:8500
+	}
+
+	@puffer host puffer.{{ public_url }}
+	handle @puffer {
+		reverse_proxy 192.168.1.29:8001
+	}
+
 	# Fallback for otherwise unhandled domains
 	handle {
-		reverse_proxy 192.168.1.29:8080
+		abort
+		# redir https://{{ public_url }}
 	}
 }
