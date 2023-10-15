@@ -53,6 +53,11 @@
 		reverse_proxy 192.168.1.29:3001
 	}
 
+	@mealie host mealie.{{ public_url }}
+	handle @mealie {
+		reverse_proxy 192.168.1.29:9925
+	}
+
 	@nextcloud host nextcloud.{{ public_url }}
 	handle @nextcloud {
 		reverse_proxy 192.168.1.29:500

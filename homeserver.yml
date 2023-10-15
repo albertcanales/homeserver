@@ -35,8 +35,8 @@
           include_role:
             name: caddy
             apply:
-              tags: test
-          tags: test
+              tags: caddy
+          tags: caddy
 
         - name: Configure DockProm
           include_role:
@@ -114,6 +114,13 @@
         - name: Configure Home Assistant
           include_role:
             name: homeassistant
+
+        - name: Configure Mealie
+          include_role:
+            name: mealie
+            apply:
+              tags: test
+          tags: test
 
         - name: Configure PufferPanel
           include_role:

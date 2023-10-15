@@ -1,4 +1,4 @@
-HOMESERVER_TAGS = homer docs admin media arr app
+HOMESERVER_TAGS = homer docs caddy admin media arr app
 TORRESERVER_TAGS =
 
 all:
