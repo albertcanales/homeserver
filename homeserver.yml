@@ -57,6 +57,10 @@
           include_role:
             name: syncthing
 
+        - name: Configure Jellyseer
+          include_role:
+            name: jellyseerr
+
         - name: Configure Deluge
           include_role:
             name: deluge

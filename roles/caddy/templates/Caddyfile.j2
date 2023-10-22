@@ -48,6 +48,11 @@
 		reverse_proxy 192.168.1.29:8096
 	}
 
+	@jellyseerr host jellyseerr.{{ public_url }}
+	handle @jellyseerr {
+		reverse_proxy 192.168.1.29:5055
+	}
+
 	@kuma host kuma.{{ public_url }}
 	handle @kuma {
 		reverse_proxy 192.168.1.29:3001

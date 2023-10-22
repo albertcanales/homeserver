@@ -1,0 +1,14 @@
+---
+- name: Configure Jellyseerr container
+  docker_container:
+    name: jellyseerr
+    image: fallenbagel/jellyseerr
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    env:
+      LOG_LEVEL: 'debug'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'jellyseerr-config:/app/config'
+    ports:
+      - '5055:5055'
