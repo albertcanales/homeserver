@@ -10,6 +10,7 @@
   docker_container:
     name: mkdocs
     image: polinux/mkdocs
+    pull: "{{ update_images }}"
     restart_policy: always
     restart: "{{ docs_repo.changed }}"
     env:

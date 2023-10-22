@@ -3,6 +3,7 @@
   docker_container:
     name: mealie
     image: ghcr.io/mealie-recipes/mealie:nightly
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     memory: 1000M
     env:

@@ -3,6 +3,7 @@
   docker_container:
     name: readarr
     image: lscr.io/linuxserver/readarr:develop
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     env:
       PUID: '1000'

@@ -3,6 +3,7 @@
   docker_container:
     name: zerotier
     image: zyclonite/zerotier
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     network_mode: host
     devices:

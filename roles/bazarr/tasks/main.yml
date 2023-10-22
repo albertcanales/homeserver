@@ -6,6 +6,7 @@
   docker_container:
     name: bazarr
     image: lscr.io/linuxserver/bazarr
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     env:
       PUID: '1000'

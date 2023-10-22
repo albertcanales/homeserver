@@ -3,6 +3,7 @@
   docker_container:
     name: pufferpanel
     image: pufferpanel/pufferpanel
+    pull: "{{ update_images }}"
     restart_policy: on-failure
     ports:
       - '8001:8080'

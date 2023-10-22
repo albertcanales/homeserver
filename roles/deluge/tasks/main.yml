@@ -3,6 +3,7 @@
   docker_container:
     name: deluge
     image: lscr.io/linuxserver/deluge
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     env:
       PUID: '1000'

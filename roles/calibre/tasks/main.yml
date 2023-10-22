@@ -3,6 +3,7 @@
   docker_container:
     name: calibre-web
     image: lscr.io/linuxserver/calibre-web
+    pull: "{{ update_images }}"
     state: started
     restart_policy: unless-stopped
     ports:

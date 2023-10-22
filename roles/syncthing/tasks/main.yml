@@ -3,6 +3,7 @@
   docker_container:
     name: syncthing
     image: lscr.io/linuxserver/syncthing
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     devices:
       - '/dev/dri:/dev/dri'

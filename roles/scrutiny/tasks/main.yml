@@ -3,6 +3,7 @@
   docker_container:
     name: scrutiny
     image: ghcr.io/analogj/scrutiny
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     capabilities:
       - SYS_RAWIO

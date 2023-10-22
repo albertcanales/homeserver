@@ -6,6 +6,7 @@
   docker_container:
     name: prowlarr
     image: lscr.io/linuxserver/prowlarr
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     env:
       PUID: '1000'

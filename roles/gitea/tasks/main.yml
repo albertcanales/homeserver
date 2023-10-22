@@ -3,6 +3,7 @@
   docker_container:
     name: gitea
     image: gitea/gitea
+    pull: "{{ update_images }}"
     restart_policy: always
     env:
       USER_UID: '1000'

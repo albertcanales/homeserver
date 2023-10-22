@@ -3,6 +3,7 @@
   docker_container:
     name: jellyfin
     image: lscr.io/linuxserver/jellyfin
+    pull: "{{ update_images }}"
     restart_policy: unless-stopped
     devices:
       - '/dev/dri:/dev/dri'

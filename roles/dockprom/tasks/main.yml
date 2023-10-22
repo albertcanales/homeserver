@@ -27,7 +27,7 @@
         grafana-data:
       services:
         prometheus:
-          image: prom/prometheus:v2.37.0
+          image: prom/prometheus:v2.46.0
           container_name: prometheus
           volumes:
             - "{{ dockprom_volume.volume.Mountpoint }}/prometheus:/etc/prometheus"
@@ -46,7 +46,7 @@
             - monitor-net
 
         alertmanager:
-          image: prom/alertmanager:v0.24.0
+          image: prom/alertmanager:v0.25.0
           container_name: alertmanager
           volumes:
             - "{{ dockprom_volume.volume.Mountpoint }}/alertmanager:/etc/alertmanager"
@@ -60,7 +60,7 @@
             - monitor-net
 
         nodeexporter:
-          image: prom/node-exporter:v1.3.1
+          image: prom/node-exporter:v1.6.1
           container_name: nodeexporter
           volumes:
             - /proc:/host/proc:ro
@@ -78,7 +78,7 @@
             - monitor-net
 
         cadvisor:
-          image: gcr.io/cadvisor/cadvisor:v0.44.0
+          image: gcr.io/cadvisor/cadvisor:v0.47.1
           container_name: cadvisor
           privileged: true
           devices:
@@ -96,7 +96,7 @@
             - monitor-net
 
         grafana:
-          image: grafana/grafana:9.0.5
+          image: grafana/grafana:10.0.3
           container_name: grafana
           volumes:
             - grafana-data:/var/lib/grafana
@@ -113,7 +113,7 @@
             - monitor-net
 
         pushgateway:
-          image: prom/pushgateway:v1.4.3
+          image: prom/pushgateway:v1.6.0
           container_name: pushgateway
           restart: unless-stopped
           expose:
@@ -122,7 +122,7 @@
             - monitor-net
 
         dockprom-caddy:
-          image: caddy:2.3.0
+          image: caddy:2.6.4
           container_name: dockprom-caddy
           ports:
             - "3000:3000"
