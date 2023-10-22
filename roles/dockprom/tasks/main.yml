@@ -121,9 +121,9 @@
           networks:
             - monitor-net
 
-        caddy:
+        dockprom-caddy:
           image: caddy:2.3.0
-          container_name: caddy
+          container_name: dockprom-caddy
           ports:
             - "3000:3000"
             - "9090:9090"

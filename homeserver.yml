@@ -118,9 +118,6 @@
         - name: Configure Mealie
           include_role:
             name: mealie
-            apply:
-              tags: test
-          tags: test
 
         - name: Configure PufferPanel
           include_role:
