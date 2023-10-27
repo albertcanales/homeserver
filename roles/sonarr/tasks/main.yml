@@ -13,5 +13,7 @@
       - 'sonarr-config:/config'
       - '{{ shows_path }}:/tv'
       - '{{ downloads_path }}:/downloads'
-    ports:
-      - '8989:8989'
+    expose:
+      - '8989'
+    networks:
+      - name: caddy

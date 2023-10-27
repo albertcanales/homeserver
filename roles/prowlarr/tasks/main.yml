@@ -14,5 +14,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'prowlarr-config:/config'
-    ports:
-      - '9696:9696'
+    expose:
+      - '9696'
+    networks:
+      - name: caddy

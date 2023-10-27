@@ -10,7 +10,7 @@
 
 	@bazarr host bazarr.{{ public_url }}
 	handle @bazarr {
-		reverse_proxy 192.168.1.29:6767
+		reverse_proxy bazarr:6767
 	}
 
 	@calibre host calibre.{{ public_url }}
@@ -50,12 +50,12 @@
 
 	@jellyseerr host jellyseerr.{{ public_url }}
 	handle @jellyseerr {
-		reverse_proxy 192.168.1.29:5055
+		reverse_proxy jellyseerr:5055
 	}
 
 	@kuma host kuma.{{ public_url }}
 	handle @kuma {
-		reverse_proxy 192.168.1.29:3001
+		reverse_proxy uptime-kuma:3001
 	}
 
 	@mealie host mealie.{{ public_url }}
@@ -75,7 +75,7 @@
 
 	@prowlarr host prowlarr.{{ public_url }}
 	handle @prowlarr {
-		reverse_proxy 192.168.1.29:9696
+		reverse_proxy prowlarr:9696
 	}
 
 	@puffer host puffer.{{ public_url }}
@@ -85,22 +85,22 @@
 
 	@radarr host radarr.{{ public_url }}
 	handle @radarr {
-		reverse_proxy 192.168.1.29:7878
+		reverse_proxy radarr:7878
 	}
 
 	@readarr host readarr.{{ public_url }}
 	handle @readarr {
-		reverse_proxy 192.168.1.29:8787
+		reverse_proxy readarr:8787
 	}
 
 	@scrutiny host scrutiny.{{ public_url }}
 	handle @scrutiny {
-		reverse_proxy 192.168.1.29:8085
+		reverse_proxy scrutiny:8080
 	}
 
 	@sonarr host sonarr.{{ public_url }}
 	handle @sonarr {
-		reverse_proxy 192.168.1.29:8989
+		reverse_proxy sonarr:8989
 	}
 
 	@syncthing host syncthing.{{ public_url }}

@@ -13,5 +13,7 @@
       - 'radarr-config:/config'
       - '{{ movies_path }}:/movies'
       - '{{ downloads_path }}:/downloads'
-    ports:
-      - '7878:7878'
+    expose:
+      - '7878'
+    networks:
+      - name: caddy

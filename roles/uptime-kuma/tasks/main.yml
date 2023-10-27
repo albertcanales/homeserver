@@ -6,7 +6,9 @@
     pull: "{{ update_images }}"
     state: started
     restart_policy: always
-    ports:
-      - '3001:3001'
+    expose:
+      - '3001'
+    networks:
+      - name: caddy
     volumes:
       - 'uptime-kuma:/app/data'

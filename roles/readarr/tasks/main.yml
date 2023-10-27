@@ -13,5 +13,7 @@
       - 'readarr-config:/config'
       - '{{ books_path }}:/books'
       - '{{ downloads_path }}:/downloads'
-    ports:
-      - '8787:8787'
+    expose:
+      - '8787'
+    networks:
+      - name: caddy

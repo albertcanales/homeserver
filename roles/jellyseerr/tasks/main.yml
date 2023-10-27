@@ -10,5 +10,7 @@
       TZ: "{{ timezone }}"
     volumes:
       - 'jellyseerr-config:/app/config'
-    ports:
-      - '5055:5055'
+    expose:
+      - '5055'
+    networks:
+      - name: caddy

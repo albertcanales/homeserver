@@ -16,5 +16,7 @@
       - 'bazarr-config:/config'
       - '{{ shows_path }}:/tv'
       - '{{ movies_path }}:/movies'
-    ports:
-      - '6767:6767'
+    expose:
+      - '6767'
+    networks:
+      - name: caddy

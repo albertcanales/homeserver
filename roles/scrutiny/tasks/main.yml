@@ -13,9 +13,11 @@
       - '/run/udev:/run/udev:ro'
       - 'scrutiny-config:/opt/scrutiny/config'
       - 'scrutiny-db:/opt/scrutiny/influxdb'
-    ports:
-      - '8085:8080' # webapp
-      - '8086:8086' # influxDB
+    expose:
+      - '8080' # webapp
+      - '8086' # influxDB
+    networks:
+      - name: caddy
     devices:
       - '/dev/sda'
       - '/dev/sdb'
