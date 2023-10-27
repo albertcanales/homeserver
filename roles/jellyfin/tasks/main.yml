@@ -15,5 +15,7 @@
       - 'jellyfin-config:/config'
       - '{{ shows_path }}:/data/shows'
       - '{{ movies_path }}:/data/movies'
-    ports:
-      - '8096:8096'
+    expose:
+      - '8096'
+    networks:
+      - name: caddy

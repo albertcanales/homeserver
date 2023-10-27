@@ -1,4 +1,8 @@
 ---
+- name: Create caddy network
+  docker_network:
+    name: caddy
+
 - name: Create build directory
   file:
     path: /root/caddy-dockerfile
@@ -39,6 +43,8 @@
       - 'caddy-configuration:/etc/caddy'
       - 'caddy-data:/data'
       - 'caddy-config:/config'
+    networks:
+      - name: caddy
 
 - name: Get Caddy configuration volume info
   docker_volume_info:

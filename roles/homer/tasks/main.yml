@@ -5,8 +5,10 @@
     image: b4bz/homer
     pull: "{{ update_images }}"
     restart_policy: always
-    ports:
-      - '8080:8080'
+    expose:
+      - '8080'
+    networks:
+      - name: caddy
     volumes:
       - 'homer-assets:/www/assets'
 

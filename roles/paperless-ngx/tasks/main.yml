@@ -13,5 +13,7 @@
     volumes:
       - 'paperless-ngx-config:/config'
       - '{{ scans_path }}:/scans'
-    ports:
-      - '8500:8000'
+    expose:
+      - '8000'
+    networks:
+      - name: caddy

@@ -17,7 +17,9 @@
       ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material'
       FAST_MODE: 'true'
       DOCS_DIRECTORY: '/mkdocs'
-    ports:
-      - '8000:8000'
+    expose:
+      - '8000'
+    networks:
+      - name: caddy
     volumes:
       - '{{ docs_path }}:/mkdocs'

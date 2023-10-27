@@ -5,7 +5,7 @@
 
 	@dashboard host {{ public_url }}
 	handle @dashboard {
-		reverse_proxy 192.168.1.29:8080
+		reverse_proxy homer:8080
 	}
 
 	@bazarr host bazarr.{{ public_url }}
@@ -15,7 +15,7 @@
 
 	@calibre host calibre.{{ public_url }}
 	handle @calibre {
-		reverse_proxy 192.168.1.29:8083
+		reverse_proxy calibre-web:8083
 	}
 
 	@deluge host deluge.{{ public_url }}
@@ -30,7 +30,7 @@
 
 	@docs host docs.{{ public_url }}
 	handle @docs {
-		reverse_proxy 192.168.1.29:8000
+		reverse_proxy mkdocs:8000
 	}
 
 	@gitea host gitea.{{ public_url }}
@@ -45,7 +45,7 @@
 
 	@jellyfin host jellyfin.{{ public_url }}
 	handle @jellyfin {
-		reverse_proxy 192.168.1.29:8096
+		reverse_proxy jellyfin:8096
 	}
 
 	@jellyseerr host jellyseerr.{{ public_url }}
@@ -60,7 +60,7 @@
 
 	@mealie host mealie.{{ public_url }}
 	handle @mealie {
-		reverse_proxy 192.168.1.29:9925
+		reverse_proxy mealie:9000
 	}
 
 	@nextcloud host nextcloud.{{ public_url }}
@@ -70,7 +70,7 @@
 
 	@paperless host paperless.{{ public_url }}
 	handle @paperless {
-		reverse_proxy 192.168.1.29:8500
+		reverse_proxy paperless-ngx:8000
 	}
 
 	@prowlarr host prowlarr.{{ public_url }}

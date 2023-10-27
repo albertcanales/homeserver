@@ -6,8 +6,10 @@
     pull: "{{ update_images }}"
     state: started
     restart_policy: unless-stopped
-    ports:
-      - '8083:8083'
+    expose:
+      - '8083'
+    networks:
+      - name: caddy
     env:
       PUID: '1000'
       PGID: '1000'
