@@ -20,7 +20,7 @@
 
 	@deluge host deluge.{{ public_url }}
 	handle @deluge {
-		reverse_proxy 192.168.1.29:8112
+		reverse_proxy deluge:8112
 	}
 
 	@dockprom host dockprom.{{ public_url }}
@@ -35,12 +35,12 @@
 
 	@gitea host gitea.{{ public_url }}
 	handle @gitea {
-		reverse_proxy 192.168.1.29:3333
+		reverse_proxy gitea:3000
 	}
 
 	@home host home.{{ public_url }}
 	handle @home {
-		reverse_proxy 192.168.1.29:8123
+		reverse_proxy localhost:8123
 	}
 
 	@jellyfin host jellyfin.{{ public_url }}
@@ -80,7 +80,7 @@
 
 	@puffer host puffer.{{ public_url }}
 	handle @puffer {
-		reverse_proxy 192.168.1.29:8001
+		reverse_proxy pufferpanel:8080
 	}
 
 	@radarr host radarr.{{ public_url }}
@@ -105,7 +105,7 @@
 
 	@syncthing host syncthing.{{ public_url }}
 	handle @syncthing {
-		reverse_proxy 192.168.1.29:3334
+		reverse_proxy syncthing:8384
 	}
 
 	# Fallback for otherwise unhandled domains

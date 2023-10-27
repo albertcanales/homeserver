@@ -5,10 +5,12 @@
     image: pufferpanel/pufferpanel
     pull: "{{ update_images }}"
     restart_policy: on-failure
-    ports:
-      - '8001:8080'
-      - '5657:5657'
-      - '10000-10100:10000-10100'
+    expose:
+      - '8080'
+      - '5657'        # SFTP
+      - '10000-10100' # Game Ports
+    networks:
+      - name: caddy
     volumes:
       - 'pufferpanel-config:/etc/pufferpanel'
       - 'pufferpanel-data:/var/lib/pufferpanel'

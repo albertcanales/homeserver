@@ -14,6 +14,9 @@
       - 'deluge-config:/config'
       - '{{ downloads_path }}:/downloads'
     ports:
-      - '8112:8112'
       - '6881:6881'
       - '6881:6881/udp'
+    expose:
+      - '8112'
+    networks:
+      - name: caddy
