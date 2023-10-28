@@ -1,110 +1,137 @@
+(acl) {
+	respond {args[0]} "Access denied" 403
+}
+
 {{ public_url }}, *.{{ public_url }} {
 	tls {
 		dns duckdns {{ duckdns_api_token }}
 	}
 
+	import acls.caddy
+
 	@dashboard host {{ public_url }}
 	handle @dashboard {
+		import acl @dashboard_acl
 		reverse_proxy homer:8080
 	}
 
 	@bazarr host bazarr.{{ public_url }}
 	handle @bazarr {
+		import acl @bazarr_acl
 		reverse_proxy bazarr:6767
 	}
 
 	@calibre host calibre.{{ public_url }}
 	handle @calibre {
+		import acl @calibre_acl
 		reverse_proxy calibre-web:8083
 	}
 
 	@deluge host deluge.{{ public_url }}
 	handle @deluge {
+		import acl @deluge_acl
 		reverse_proxy deluge:8112
 	}
 
 	@dockprom host dockprom.{{ public_url }}
 	handle @dockprom {
+		import acl @dockprom_acl
 		reverse_proxy 192.168.1.29:3000
 	}
 
 	@docs host docs.{{ public_url }}
 	handle @docs {
+		import acl @docs_acl
 		reverse_proxy mkdocs:8000
 	}
 
 	@gitea host gitea.{{ public_url }}
 	handle @gitea {
+		import acl @gitea_acl
 		reverse_proxy gitea:3000
 	}
 
 	@home host home.{{ public_url }}
 	handle @home {
+		import acl @home_acl
 		reverse_proxy localhost:8123
 	}
 
 	@jellyfin host jellyfin.{{ public_url }}
 	handle @jellyfin {
+		import acl @jellyfin_acl
 		reverse_proxy jellyfin:8096
 	}
 
 	@jellyseerr host jellyseerr.{{ public_url }}
 	handle @jellyseerr {
+		import acl @jellyfin_acl
 		reverse_proxy jellyseerr:5055
 	}
 
 	@kuma host kuma.{{ public_url }}
 	handle @kuma {
+		import acl @kuma_acl
 		reverse_proxy uptime-kuma:3001
 	}
 
 	@mealie host mealie.{{ public_url }}
 	handle @mealie {
+		import acl @mealie_acl
 		reverse_proxy mealie:9000
 	}
 
 	@nextcloud host nextcloud.{{ public_url }}
 	handle @nextcloud {
+		import acl @nextcloud_acl
 		reverse_proxy 192.168.1.29:500
 	}
 
 	@paperless host paperless.{{ public_url }}
 	handle @paperless {
+		import acl @paperless_acl
 		reverse_proxy paperless-ngx:8000
 	}
 
 	@prowlarr host prowlarr.{{ public_url }}
 	handle @prowlarr {
+		import acl @prowlarr_acl
 		reverse_proxy prowlarr:9696
 	}
 
 	@puffer host puffer.{{ public_url }}
 	handle @puffer {
+		import acl @puffer_acl
 		reverse_proxy pufferpanel:8080
 	}
 
 	@radarr host radarr.{{ public_url }}
 	handle @radarr {
+		import acl @radarr_acl
 		reverse_proxy radarr:7878
 	}
 
 	@readarr host readarr.{{ public_url }}
 	handle @readarr {
+		import acl @readarr_acl
 		reverse_proxy readarr:8787
 	}
 
 	@scrutiny host scrutiny.{{ public_url }}
 	handle @scrutiny {
+		import acl @scrutiny_acl
 		reverse_proxy scrutiny:8080
 	}
 
 	@sonarr host sonarr.{{ public_url }}
 	handle @sonarr {
+		import acl @sonarr_acl
 		reverse_proxy sonarr:8989
 	}
 
 	@syncthing host syncthing.{{ public_url }}
 	handle @syncthing {
+		import acl @syncthing_acl
 		reverse_proxy syncthing:8384
 	}
 

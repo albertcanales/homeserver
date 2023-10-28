@@ -50,16 +50,24 @@
   docker_volume_info:
     name: caddy-configuration
   register: configuration_volume
+  tags: test
 
-- name: Template the caddyfile into the configuration directory
+- name: Template the configuration files into the configuration directory
   template:
-    src: Caddyfile.j2
-    dest: "{{ configuration_volume.volume.Mountpoint }}/Caddyfile"
-  register: caddyfile
+    src: "{{ item.src }}"
+    dest: "{{ configuration_volume.volume.Mountpoint }}/{{ item.dest }}"
+  with_items:
+    - src: acls.caddy.j2
+      dest: acls.caddy
+    - src: Caddyfile.j2
+      dest: Caddyfile
+  register: caddy_config
+  tags: test
 
 - name: Reload Caddy
   community.docker.docker_container_exec:
     container: caddy
     command: caddy reload
     chdir: /etc/caddy
-  when: caddyfile.changed
+  when: caddy_config.changed
+  tags: test
