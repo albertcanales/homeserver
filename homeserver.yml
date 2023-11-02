@@ -111,6 +111,10 @@
           include_role:
             name: jellyfin
 
+        - name: Configure Immich
+          include_role:
+            name: immich
+
         - name: Configure Calibre
           include_role:
             name: calibre

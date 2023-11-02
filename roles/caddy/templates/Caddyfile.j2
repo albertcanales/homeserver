@@ -69,6 +69,12 @@
 		reverse_proxy jellyseerr:5055
 	}
 
+	@immich host immich.{{ public_url }}
+	handle @immich {
+		import acl @immich_acl
+		reverse_proxy immich:8080
+	}
+
 	@kuma host kuma.{{ public_url }}
 	handle @kuma {
 		import acl @kuma_acl

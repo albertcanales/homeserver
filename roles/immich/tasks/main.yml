@@ -1,0 +1,67 @@
+---
+- name: Create Immich network
+  docker_network:
+    name: immich
+
+- name: Configure Immich Cache container
+  docker_container:
+    name: immich_redis
+    image: redis
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    expose:
+      - '6379'
+    networks:
+      - name: immich
+  register: immich_cache_container
+
+- name: Configure Immich DB container
+  docker_container:
+    name: immich_postgres
+    image: postgres:14
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    env:
+      POSTGRES_USER: "{{ immich_postgres_user }}"
+      POSTGRES_PASSWORD: "{{ immich_postgres_password }}"
+      POSTGRES_DB: "{{ immich_postgres_db }}"
+    volumes:
+      - 'immich_postgres_data:/var/lib/postgresql/data'
+    expose:
+      - '5432'
+    networks:
+      - name: immich
+  register: immich_db_container
+
+- name: Configure Immich Application container
+  docker_container:
+    name: immich
+    image: ghcr.io/imagegenius/immich:latest
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+      DB_HOSTNAME: "{{ immich_db_container.container.NetworkSettings.Networks.immich.IPAddress }}"
+      DB_USERNAME: "{{ immich_postgres_user }}"
+      DB_PASSWORD: "{{ immich_postgres_password }}"
+      DB_DATABASE_NAME: "{{ immich_postgres_db }}"
+      REDIS_HOSTNAME: "{{ immich_cache_container.container.NetworkSettings.Networks.immich.IPAddress }}"
+      DISABLE_MACHINE_LEARNING: 'false'
+      DISABLE_TYPESENSE: 'false'
+      DB_PORT: '5432'
+      REDIS_PORT: '6379'
+      MACHINE_LEARNING_WORKERS: '1'
+      MACHINE_LEARNING_WORKER_TIMEOUT: '120'
+      ALLOW_SIGNUP: 'false'
+    volumes:
+      - 'immich_config:/config'
+      - 'immich_ml:/config/machine-learning'
+      - '{{ photos_path }}/photos:/photos'
+      - '{{ photos_path }}/import:/import:ro'
+    expose:
+      - '8080'
+    networks:
+      - name: immich
+      - name: caddy
