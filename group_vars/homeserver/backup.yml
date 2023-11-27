@@ -13,16 +13,16 @@ container_start_stop: false
 # List of containers to back up
 containers:
   - bazarr
+  - caddy
   - calibre
   - deluge
   - dockprom
-  - freshrss
   - gitea
   - homeassistant
   - jellyfin
+  - jellyseerr
+  - mealie
   - nextcloud
-  - nginx-proxy-manager
-  - overleaf
   - paperless-ngx
   - prowlarr
   # - pufferpanel
