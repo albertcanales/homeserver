@@ -45,6 +45,12 @@
 		reverse_proxy mkdocs:8000
 	}
 
+	@gatus host gatus.{{ public_url }}
+	handle @gatus {
+		import acl @gatus_acl
+		reverse_proxy gatus:8080
+	}
+
 	@gitea host gitea.{{ public_url }}
 	handle @gitea {
 		import acl @gitea_acl

@@ -1,0 +1,24 @@
+---
+- name: Configure Gatus container
+  docker_container:
+    name: gatus
+    image: twinproduction/gatus
+    pull: "{{ update_images }}"
+    restart_policy: always
+    volumes:
+      - 'gatus-config:/config'
+      - 'gatus-data:/data'
+    expose:
+      - '8080'
+    networks:
+      - name: caddy
+
+- name: Get Gatus config volume info
+  docker_volume_info:
+    name: gatus-config
+  register: config_volume
+
+- name: Template the configuration files into the config directory
+  template:
+    src: "config.yml"
+    dest: "{{ config_volume.volume.Mountpoint }}/config.yaml"

@@ -46,6 +46,13 @@
           include_role:
             name: scrutiny
 
+        - name: Gatus
+          include_role:
+            name: gatus
+            apply:
+              tags: gatus
+          tags: gatus
+
         - name: Uptime Kuma
           include_role:
             name: uptime-kuma
