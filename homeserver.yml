@@ -146,3 +146,10 @@
           include_role:
             name: gitea
       tags: app
+
+    - name: configure Borg backups
+      include_role:
+        name: borg
+        apply:
+          tags: borg
+      tags: borg

@@ -1,0 +1,23 @@
+---
+- name: Install borg and borgmatic
+  apt:
+    name:
+      - borgbackup
+      - borgmatic
+
+- name: Create configuration directory
+  file:
+    path: /etc/borgmatic
+    state: directory
+
+- name: Template configuration file
+  template:
+    src: config.yml
+    dest: /etc/borgmatic/config.yaml
+
+- name: Create daily job
+  ansible.builtin.cron:
+    name: "borg backup"
+    minute: "0"
+    hour: "3"
+    job: "borgmatic --verbosity -1 --log-file /var/log/borgmatic --log-file-verbosity 1"

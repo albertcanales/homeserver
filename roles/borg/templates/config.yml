@@ -1,0 +1,55 @@
+location:
+    source_directories:
+        - /data/sync
+        - /data/media/books
+
+    repositories:
+        - "{{ remote_repository }}"
+
+storage:
+    encryption_passphrase: "{{ encryption_passphrase }}"
+
+retention:
+    keep_daily: 7
+    keep_weekly: 4
+    keep_monthly: 6
+    keep_yearly: 1
+
+consistency:
+    checks:
+        - repository
+        - archives
+
+hooks:
+    before_backup:
+        - echo "Starting a backup."
+
+    before_prune:
+        - echo "Starting pruning."
+
+    before_check:
+        - echo "Starting checks."
+
+    before_extract:
+        - echo "Starting extracting."
+
+    after_backup:
+        - echo "Finished a backup."
+
+    after_prune:
+        - echo "Finished pruning."
+
+    after_check:
+        - echo "Finished checks."
+
+    after_extract:
+        - echo "Finished extracting."
+
+    on_error:
+        - echo "Error during prune/create/check."
+
+    before_everything:
+        - echo "Starting actions."
+
+    after_everything:
+        - echo "Completed actions."
