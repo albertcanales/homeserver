@@ -87,6 +87,12 @@
 		reverse_proxy uptime-kuma:3001
 	}
 
+	@lidarr host lidarr.{{ public_url }}
+	handle @lidarr {
+		import acl @lidarr_acl
+		reverse_proxy lidarr:8686
+	}
+
 	@mealie host mealie.{{ public_url }}
 	handle @mealie {
 		import acl @mealie_acl

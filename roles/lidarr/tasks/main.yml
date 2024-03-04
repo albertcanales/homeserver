@@ -1,0 +1,19 @@
+---
+- name: Configure Lidarr container
+  docker_container:
+    name: lidarr
+    image: lscr.io/linuxserver/lidarr:latest
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: "{{ timezone }}"
+    volumes:
+      - 'lidarr-config:/config'
+      - '{{ music_path }}:/music'
+      - '{{ downloads_path }}:/downloads'
+    expose:
+      - '8686'
+    networks:
+      - name: caddy

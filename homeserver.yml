@@ -72,6 +72,13 @@
           include_role:
             name: deluge
 
+        - name: Configure Lidarr
+          include_role:
+            name: lidarr
+            apply:
+              tags: arr
+          tags: arr
+
         - name: Configure Sonarr
           include_role:
             name: sonarr

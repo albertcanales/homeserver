@@ -21,6 +21,7 @@ containers:
   - homeassistant
   - jellyfin
   - jellyseerr
+  - lidarr
   - mealie
   - nextcloud
   - paperless-ngx
@@ -51,6 +52,9 @@ backup_directories:
   - name: movies
     should_backup: false
     path: "{{ movies_path }}"
+  - name: music
+    should_backup: true
+    path: "{{ music_path }}"
   - name: shows
     should_backup: false
     path: "{{ shows_path }}"
