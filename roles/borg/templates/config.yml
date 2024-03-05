@@ -1,7 +1,10 @@
 location:
     source_directories:
+        - /data/files
+        - /data/scans
         - /data/sync
         - /data/media/books
+        - /var/lib/docker/volumes
 
     repositories:
         - "{{ remote_repository }}"
