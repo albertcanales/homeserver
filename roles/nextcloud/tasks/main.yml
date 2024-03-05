@@ -5,15 +5,6 @@
     pull: "{{ update_images }}"
     definition:
       version: '2'
-      volumes:
-        nextcloud-db:
-        nextcloud-nextcloud:
-        nextcloud-data:
-          driver: local
-          driver_opts:
-            type: 'none'
-            o: 'bind'
-            device: "{{ files_path }}"
       services:
         db:
           container_name: nextcloud-db
@@ -37,9 +28,14 @@
             - db
           volumes:
             - nextcloud-nextcloud:/var/www/html
-            - nextcloud-data:/var/www/html/data
+            - type: bind
+              source: /data/files
+              target: /var/www/html/data
           environment:
             - "MYSQL_PASSWORD={{ nextcloud_db_password }}"
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud
             - MYSQL_HOST=db
+      volumes:
+        nextcloud-db:
+        nextcloud-nextcloud:
