@@ -1,17 +1,8 @@
 ---
-- name: Create DockProm volume
-  docker_volume:
-    name: dockprom
-
-- name: Get DockProm volume info
-  docker_volume_info:
-    name: dockprom
-  register: dockprom_volume
-
 - name: Clone GitHub repository with configuration
   git:
     repo: https://github.com/stefanprodan/dockprom.git
-    dest: "{{ dockprom_volume.volume.Mountpoint }}"
+    dest: /root/dockprom
     update: false
 
 - name: Configure DockProm Service
@@ -30,7 +21,7 @@
           image: prom/prometheus:v2.46.0
           container_name: prometheus
           volumes:
-            - "{{ dockprom_volume.volume.Mountpoint }}/prometheus:/etc/prometheus"
+            - "/root/dockprom/prometheus:/etc/prometheus"
             - prometheus-data:/prometheus
           command:
             - '--config.file=/etc/prometheus/prometheus.yml'
@@ -49,7 +40,7 @@
           image: prom/alertmanager:v0.25.0
           container_name: alertmanager
           volumes:
-            - "{{ dockprom_volume.volume.Mountpoint }}/alertmanager:/etc/alertmanager"
+            - "/root/dockprom/alertmanager:/etc/alertmanager"
           command:
             - '--config.file=/etc/alertmanager/config.yml'
             - '--storage.path=/alertmanager'
@@ -100,8 +91,8 @@
           container_name: grafana
           volumes:
             - grafana-data:/var/lib/grafana
-            - "{{ dockprom_volume.volume.Mountpoint }}/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards"
-            - "{{ dockprom_volume.volume.Mountpoint }}/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources"
+            - "/root/dockprom/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards"
+            - "/root/dockprom/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources"
           environment:
             - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
             - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
@@ -130,7 +121,7 @@
             - "9093:9093"
             - "9091:9091"
           volumes:
-            - "{{ dockprom_volume.volume.Mountpoint }}/caddy:/etc/caddy"
+            - "/root/dockprom/caddy:/etc/caddy"
           environment:
             - ADMIN_USER=${ADMIN_USER:-admin}
             - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}

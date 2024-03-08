@@ -120,9 +120,6 @@
         - name: Configure Nextcloud AIO
           include_role:
             name: nextcloud-aio
-            apply:
-              tags: test
-          tags: test
 
         - name: Configure Jellyfin
           include_role:
