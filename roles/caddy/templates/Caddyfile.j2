@@ -102,7 +102,7 @@
 	@nextcloud host nextcloud.{{ public_url }}
 	handle @nextcloud {
 		import acl @nextcloud_acl
-		reverse_proxy 192.168.1.29:500
+		reverse_proxy 192.168.1.29:11000
 	}
 
 	@paperless host paperless.{{ public_url }}
