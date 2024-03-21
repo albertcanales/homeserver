@@ -1,0 +1,16 @@
+---
+- name: Configure Navidrome container
+  docker_container:
+    name: navidrome
+    image: deluan/navidrome
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    env:
+      ND_SCANSCHEDULE: 1h
+    volumes:
+      - 'navidrome-data:/data'
+      - '{{ music_path }}:/music:ro'
+    expose:
+      - '4533'
+    networks:
+      - name: caddy

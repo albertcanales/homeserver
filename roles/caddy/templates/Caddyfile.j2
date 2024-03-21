@@ -71,7 +71,7 @@
 
 	@jellyseerr host jellyseerr.{{ public_url }}
 	handle @jellyseerr {
-		import acl @jellyfin_acl
+		import acl @jellyseerr_acl
 		reverse_proxy jellyseerr:5055
 	}
 
@@ -99,6 +99,12 @@
 		reverse_proxy mealie:9000
 	}
 
+	@navidrome host navidrome.{{ public_url }}
+	handle @navidrome {
+		import acl @navidrome_acl
+		reverse_proxy navidrome:4533
+	}
+
 	@nextcloud host nextcloud.{{ public_url }}
 	handle @nextcloud {
 		import acl @nextcloud_acl
@@ -109,6 +115,12 @@
 	handle @paperless {
 		import acl @paperless_acl
 		reverse_proxy paperless-ngx:8000
+	}
+
+	@picard host picard.{{ public_url }}
+	handle @picard {
+		import acl @picard_acl
+		reverse_proxy picard:5800
 	}
 
 	@prowlarr host prowlarr.{{ public_url }}

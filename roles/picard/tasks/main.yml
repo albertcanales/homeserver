@@ -1,0 +1,15 @@
+---
+- name: Configure Picard container
+  docker_container:
+    name: picard
+    image: mikenye/picard
+    pull: "{{ update_images }}"
+    restart_policy: unless-stopped
+    volumes:
+      - 'picard-config:/config'
+      - '{{ music_path }}:/music'
+      - '{{ music_raw_path }}:/downloads'
+    expose:
+      - '5800'
+    networks:
+      - name: caddy

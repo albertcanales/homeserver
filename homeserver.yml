@@ -64,9 +64,13 @@
           include_role:
             name: syncthing
 
-        - name: Configure Jellyseer
+        - name: Configure Jellyseerr
           include_role:
             name: jellyseerr
+
+        - name: Configure Picard
+          include_role:
+            name: picard
 
         - name: Configure Deluge
           include_role:
@@ -132,6 +136,10 @@
         - name: Configure Calibre
           include_role:
             name: calibre
+
+        - name: Configure Navidrome
+          include_role:
+            name: navidrome
 
         - name: Configure Home Assistant
           include_role:
